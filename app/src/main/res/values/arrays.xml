@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_sort_options">
+        <item>Best match</item>
+        <item>Most stars</item>
+        <item>Fewest stars</item>
+        <item>Most forks</item>
+        <item>Fewest forks</item>
+        <item>Recently Updated</item>
+        <item>Least recently Updated</item>
+    </string-array>
+
+    <string-array name="search_lang_options">
+        <item>Any Language</item>
+        <item>C</item>
+        <item>C#</item>
+        <item>C++</item>
+        <item>Clojure</item>
+        <item>CoffeeScript</item>
+        <item>CSS</item>
+        <item>Go</item>
+        <item>Haskell</item>
+        <item>HTML</item>
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>Lua</item>
+        <item>Matlab</item>
+        <item>Objective-C</item>
+        <item>Perl</item>
+        <item>PHP</item>
+        <item>Python</item>
+        <item>R</item>
+        <item>Ruby</item>
+        <item>Scala</item>
+        <item>Shell</item>
+        <item>Swift</item>
+        <item>TeX</item>
+        <item>Vim script</item>
+        <item>Other Language</item>
+    </string-array>
+</resources>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Github</string>
+    <string name="login_username_hint">输入用户名或邮箱地址</string>
+    <string name="login_password_hint">输入密码</string>
+    <string name="login">登录</string>
+
+    <string name="http_error_message">错误码：%1$d，%2$s</string>
+
+    <string name="search_no_result">We couldn’t find any repositories matching \'%1$s\'</string>
+</resources>
