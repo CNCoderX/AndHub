@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.cncoderx.github.ui.view.IconView
+        android:id="@+id/iv_app_bar_nav_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ic_back"
+        android:textSize="28sp"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_app_bar_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:maxLines="1"
+        android:text="@string/app_name"/>
+</merge>

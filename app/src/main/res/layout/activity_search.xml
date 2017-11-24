@@ -17,11 +17,13 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <ImageView
+        <com.cncoderx.github.ui.view.IconView
             android:id="@+id/iv_search_header_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/otcicon"/>
+            android:text="@string/ic_logo"
+            android:textColor="@color/white"
+            android:textSize="28sp"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -39,7 +41,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="40dp"
                 android:maxLines="1"
-                android:hint="Search Github"
+                android:hint="@string/search_hint"
                 android:textColorHint="#C0FFFFFF"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -47,21 +49,26 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"/>
 
-            <ImageView
+            <com.cncoderx.github.ui.view.IconView
                 android:id="@+id/iv_search_button"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/search"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="@string/ic_search"
+                android:textColor="#C0C0C0"
+                android:textSize="28sp"/>
 
         </LinearLayout>
 
-        <ImageView
+        <com.cncoderx.github.ui.view.IconView
             android:id="@+id/iv_search_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            app:srcCompat="@drawable/menu"/>
+            android:text="@string/ic_menu"
+            android:textColor="@color/white"
+            android:textSize="28sp"/>
+
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -87,7 +94,6 @@
                 android:visibility="gone">
 
                 <ImageView
-                    android:id="@+id/iv_search_empty_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

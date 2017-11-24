@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="search_sort_options">
-        <item>Best match</item>
-        <item>Most stars</item>
-        <item>Fewest stars</item>
-        <item>Most forks</item>
-        <item>Fewest forks</item>
-        <item>Recently Updated</item>
-        <item>Least recently Updated</item>
+        <item>@string/best_match</item>
+        <item>@string/most_stars</item>
+        <item>@string/fewest_stars</item>
+        <item>@string/most_forks</item>
+        <item>@string/fewest_forks</item>
+        <item>@string/recently_updated</item>
+        <item>@string/least_recently_updated</item>
     </string-array>
 
     <string-array name="search_lang_options">
@@ -37,5 +37,12 @@
         <item>TeX</item>
         <item>Vim script</item>
         <item>Other Language</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>@string/default_lang</item>
+        <item>English</item>
+        <item>简体中文</item>
+        <item>繁體中文</item>
     </string-array>
 </resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_item_selector"
+    style="@style/box_padding">
+
+    <ImageView
+        android:id="@+id/iv_gist_avatar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/box_horizontal_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_gist_created"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/gray"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_gist_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="#303030"
+            android:textSize="14sp"
+            android:textColorHint="@color/text_hint"
+            android:hint="@string/no_desc"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_file"
+                    android:textSize="15sp"
+                    android:textColor="#606060"/>
+
+                <TextView
+                    android:id="@+id/tv_gist_files"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textSize="14sp"
+                    android:textColor="#606060"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_message"
+                    android:textSize="18sp"
+                    android:textColor="#606060"/>
+
+                <TextView
+                    android:id="@+id/tv_gist_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textSize="14sp"
+                    android:textColor="#606060"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -2,6 +2,7 @@ package com.cncoderx.github.utils;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Base64;
 
 import java.security.SecureRandom;
@@ -17,6 +18,9 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESUtils {
 
     public static String encrypt(String key, String clear) {
+        if (TextUtils.isEmpty(clear))
+            return "";
+
         try {
             byte[] rawKey = getRawKey(key.getBytes());
             byte[] encrypted = encrypt(rawKey, clear.getBytes());
@@ -27,6 +31,9 @@ public class AESUtils {
     }
 
     public static String decrypt(String key, String encrypted) {
+        if (TextUtils.isEmpty(encrypted))
+            return "";
+
         try {
             byte[] _encrypted = Base64.decode(encrypted, Base64.DEFAULT);
             byte[] rawKey = getRawKey(key.getBytes());

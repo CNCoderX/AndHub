@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.cncoderx.github.ui.view.AppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_tab_pager_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_pager_bottom_height"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+</LinearLayout>

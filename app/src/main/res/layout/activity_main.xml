@@ -1,17 +1,402 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.SlidingPaneLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sliding_pane_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cncoderx.github.MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/theme_black">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/box_padding">
+
+                <ImageView
+                    android:id="@+id/iv_main_user_avatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/identicon"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_main_user_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="CNCoderX"/>
+
+                    <TextView
+                        android:id="@+id/tv_main_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp"
+                        android:textColorHint="@color/gray"
+                        android:hint="@string/no_name"
+                        tools:text="cncoderx"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/box_padding">
+
+                <LinearLayout
+                    android:id="@+id/ll_main_follower_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_main_follower_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/zero"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/followers"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#30000000"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_main_following_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_main_following_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/zero"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/following"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/ll_main_menu_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/white_item_selector"
+                style="@style/box_padding">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_news"
+                    android:textSize="24sp"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/box_horizontal_padding"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:text="@string/news"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_main_menu_repos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/white_item_selector"
+                style="@style/box_padding">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_repo"
+                    android:textSize="24sp"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/box_horizontal_padding"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:text="@string/repositories"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:background="@drawable/list_divider"/>
+
+            <LinearLayout
+                android:id="@+id/ll_main_menu_organs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/white_item_selector"
+                style="@style/box_padding">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_group"
+                    android:textSize="24sp"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/box_horizontal_padding"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:text="@string/organizations"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_main_menu_stars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/white_item_selector"
+                style="@style/box_padding">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_star"
+                    android:textSize="24sp"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/box_horizontal_padding"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:text="@string/stars"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_main_menu_gists"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/white_item_selector"
+                style="@style/box_padding">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_gist"
+                    android:textSize="24sp"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/box_horizontal_padding"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:text="@string/gists"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:background="@drawable/list_divider"/>
+
+            <LinearLayout
+                android:id="@+id/ll_main_menu_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/white_item_selector"
+                style="@style/box_padding">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_about"
+                    android:textSize="24sp"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/box_horizontal_padding"
+                    android:textColor="@color/text_black"
+                    android:textSize="16sp"
+                    android:text="@string/about"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/fl_main_settings"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/white_item_selector">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_setting"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="13sp"
+                    android:text="@string/settings"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fl_main_logout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/white_item_selector">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_exit"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="13sp"
+                    android:text="@string/logout"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@color/theme_black">
+
+            <com.cncoderx.github.ui.view.IconView
+                android:id="@+id/iv_main_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_menu"
+                android:textSize="28dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:text="@string/app_name"/>
+
+            <com.cncoderx.github.ui.view.IconView
+                android:id="@+id/iv_main_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_search"
+                android:textSize="28dp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </LinearLayout>
+</android.support.v4.widget.SlidingPaneLayout>

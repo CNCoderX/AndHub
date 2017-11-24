@@ -9,6 +9,10 @@
     android:gravity="center_horizontal"
     tools:context="com.cncoderx.github.ui.activity.LoginActivity">
 
+    <com.cncoderx.github.ui.view.AppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

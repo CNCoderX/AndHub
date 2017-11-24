@@ -11,18 +11,18 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cncoderx.github.R;
-import com.cncoderx.github.entites.Repositories;
-import com.cncoderx.github.entites.Repository;
-import com.cncoderx.github.netservice.ISearchService;
 import com.cncoderx.github.preference.SearchOptionsPreference;
-import com.cncoderx.github.ui.adapter.RepositoryAdapter;
+import com.cncoderx.github.sdk.ServiceGenerator;
+import com.cncoderx.github.sdk.model.Repositories;
+import com.cncoderx.github.sdk.model.Repository;
+import com.cncoderx.github.sdk.service.ISearchService;
+import com.cncoderx.github.ui.adapter.RepoListAdapter;
 import com.cncoderx.github.ui.dialog.SearchOptionsDialog;
-import com.cncoderx.github.utils.URLUtils;
+import com.cncoderx.github.utils.IntentExtra;
 import com.cncoderx.recyclerviewhelper.RecyclerViewHelper;
 import com.cncoderx.recyclerviewhelper.listener.OnItemClickListener;
 import com.cncoderx.recyclerviewhelper.listener.OnLoadMoreListener;
@@ -37,16 +37,8 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchActivity extends BaseActivity implements OnLoadMoreListener {
-    @BindView(R.id.iv_search_header_icon)
-    ImageView ivHeaderIcon;
-
-    @BindView(R.id.iv_search_button)
-    ImageView ivSearchBtn;
-
     @BindView(R.id.et_search_key)
     EditText etSearchKey;
 
@@ -62,7 +54,7 @@ public class SearchActivity extends BaseActivity implements OnLoadMoreListener {
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
 
-    private RepositoryAdapter mAdapter;
+    private RepoListAdapter mAdapter;
 
     private class RequestParam {
         String key;
@@ -80,27 +72,29 @@ public class SearchActivity extends BaseActivity implements OnLoadMoreListener {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-        mAdapter = new RepositoryAdapter();
+        mAdapter = new RepoListAdapter();
 
         RecyclerViewHelper.setLinearLayout(rvSearchList);
         RecyclerViewHelper.setAdapter(rvSearchList, mAdapter);
         RecyclerViewHelper.setDivider(rvSearchList,
                 ContextCompat.getDrawable(this, R.drawable.list_divider),
                 getResources().getDimensionPixelOffset(R.dimen.divider_height));
-        RecyclerViewHelper.setLoadMoreListener(rvSearchList, this);
+        RecyclerViewHelper.setLoadMoreListener(rvSearchList, R.layout.item_loading_more, this);
         RecyclerViewHelper.setOnItemClickListener(rvSearchList, new OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Repositories.Item item = mAdapter.get(position);
-                String[] fullName = item.getFullName().split("/");
+                Repository repository = mAdapter.get(position);
                 Intent intent = new Intent(SearchActivity.this, RepoDetailActivity.class);
-                intent.putExtra("owner", fullName[0]);
-                intent.putExtra("repo", fullName[1]);
+                intent.putExtra(IntentExtra.KEY_OWNER, repository.owner.login);
+                intent.putExtra(IntentExtra.KEY_REPO, repository.name);
                 startActivity(intent);
             }
         });
 
         refreshLayout.setEnabled(false);
+//        ILoadingView loadingView = RecyclerViewHelper.getLoadingView(rvSearchList);
+//        ImageView imageView = (ImageView) loadingView.getView().findViewById(R.id.tv_loading_view_show);
+//        Glide.with(this).asGif().load(R.mipmap.loading_small).into(imageView);
     }
 
     @OnClick(R.id.iv_search_button)
@@ -172,12 +166,7 @@ public class SearchActivity extends BaseActivity implements OnLoadMoreListener {
     }
 
     private void search(final RequestParam param, @Nullable final ILoadingView view) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URLUtils.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ISearchService service = retrofit.create(ISearchService.class);
+        ISearchService service = ServiceGenerator.create(ISearchService.class);
         Call<Repositories> call = service.search(param.key, param.sort,
                 param.order, param.page, param.pageSize);
         call.enqueue(new Callback<Repositories>() {
@@ -190,9 +179,9 @@ public class SearchActivity extends BaseActivity implements OnLoadMoreListener {
                         if (view == null && mAdapter.size() > 0) {
                             mAdapter.clear();
                         }
-                        List<Repositories.Item> data = repositories.getItems();
+                        List<Repository> data = repositories.items;
                         mAdapter.addAll(data);
-                        isCompleted = repositories.getTotalCount() == mAdapter.size();
+                        isCompleted = repositories.totalCount == mAdapter.size();
                     }
                     param.page++;
                 }
