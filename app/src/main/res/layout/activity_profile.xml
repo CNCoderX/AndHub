@@ -39,9 +39,20 @@
                     android:textSize="16sp"
                     tools:text="CNCoderX"/>
 
+                <TextView
+                    android:id="@+id/tv_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:maxLines="1"
+                    android:textSize="12sp"
+                    android:textColor="@color/theme_blue"
+                    tools:text="cncoderx"/>
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_profile_bio"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:gravity="center_vertical"
@@ -50,21 +61,15 @@
                 android:paddingRight="10dp">
 
                 <TextView
-                    android:id="@+id/tv_profile_name"
+                    android:id="@+id/tv_profile_bio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:textSize="14sp"
                     android:textColor="@color/gray"
-                    tools:text="cncoderx"/>
+                    android:hint="@string/no_bio"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/white">
-
-            </LinearLayout>
         </LinearLayout>
 
         <ImageView
@@ -83,12 +88,114 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:divider="@drawable/list_divider"
-        app:showDividers="beginning|middle|end">
+        app:showDividers="middle|end">
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            style="@style/box_padding">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_group"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray"/>
+
+                <TextView
+                    android:id="@+id/tv_profile_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_loc"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray"/>
+
+                <TextView
+                    android:id="@+id/tv_profile_local"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_email"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray"/>
+
+                <TextView
+                    android:id="@+id/tv_profile_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <com.cncoderx.github.ui.view.IconView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_link"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray"/>
+
+                <TextView
+                    android:id="@+id/tv_profile_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_profile_follow"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/ll_profile_follower"
@@ -111,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="@string/followers"
+                    android:text="@string/followers2"
                     android:textColor="@color/gray"
                     android:textSize="12sp"/>
             </LinearLayout>
@@ -137,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="@string/following"
+                    android:text="@string/following2"
                     android:textColor="@color/gray"
                     android:textSize="12sp"/>
             </LinearLayout>
@@ -156,7 +263,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/follow"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textColor="#606060"
                     android:background="@drawable/btn_follow_bg"/>
             </FrameLayout>
@@ -166,33 +273,92 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_height"/>
 
-        <!--<LinearLayout-->
-        <!--android:id="@+id/ll_my_profile_group"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/single_item_height"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:paddingLeft="@dimen/box_horizontal_padding"-->
-        <!--android:paddingRight="@dimen/box_vertical_padding"-->
-        <!--android:background="@drawable/white_item_selector">-->
+        <LinearLayout
+            android:id="@+id/ll_profile_member"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_vertical_padding"
+            android:background="@drawable/white_item_selector"
+            android:visibility="gone">
 
-        <!--<TextView-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:drawableLeft="@mipmap/ic_group_d"-->
-        <!--android:drawablePadding="10dp"-->
-        <!--android:text="Organizations"-->
-        <!--android:textColor="@color/text_black"-->
-        <!--android:textSize="16sp"/>-->
+            <com.cncoderx.github.ui.view.IconView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_group"
+                android:textColor="@color/text_black"
+                android:textSize="22sp"/>
 
-        <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@mipmap/enter"/>-->
-        <!--</LinearLayout>-->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/box_horizontal_padding"
+                android:text="@string/members"
+                android:textColor="@color/text_black"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_profile_member_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zero"
+                android:visibility="gone"
+                style="@style/counter_text"/>
+
+            <com.cncoderx.github.ui.view.IconView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/theme_black"/>
+        </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_profile_organ"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_vertical_padding"
+            android:background="@drawable/white_item_selector"
+            android:visibility="gone">
+
+            <com.cncoderx.github.ui.view.IconView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_group"
+                android:textColor="@color/text_black"
+                android:textSize="22sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/box_horizontal_padding"
+                android:text="@string/organizations"
+                android:textColor="@color/text_black"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_profile_organ_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zero"
+                android:visibility="gone"
+                style="@style/counter_text"/>
+
+            <com.cncoderx.github.ui.view.IconView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/theme_black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_profile_repos"
             android:layout_width="match_parent"
             android:layout_height="@dimen/single_item_height"
             android:gravity="center_vertical"
@@ -221,15 +387,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zero"
+                android:visibility="gone"
                 style="@style/counter_text"/>
 
-            <ImageView
+            <com.cncoderx.github.ui.view.IconView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/enter"/>
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/theme_black"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_profile_gists"
             android:layout_width="match_parent"
             android:layout_height="@dimen/single_item_height"
             android:gravity="center_vertical"
@@ -258,12 +428,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zero"
+                android:visibility="gone"
                 style="@style/counter_text"/>
 
-            <ImageView
+            <com.cncoderx.github.ui.view.IconView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/enter"/>
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/theme_black"/>
         </LinearLayout>
     </android.support.v7.widget.LinearLayoutCompat>
 </LinearLayout>

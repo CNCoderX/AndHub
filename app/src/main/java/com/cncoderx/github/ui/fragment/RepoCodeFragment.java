@@ -14,12 +14,12 @@ import com.cncoderx.github.utils.IntentExtra;
 /**
  * @author cncoderx
  */
-public class RepoDetailCodeFragment extends Fragment {
-    private RepoDetailCodePathFragment mPathFragment;
-    private RepoDetailCodeListFragment mListFragment;
+public class RepoCodeFragment extends Fragment {
+    private RepoCodePathFragment mPathFragment;
+    private RepoCodeListFragment mListFragment;
 
-    public static RepoDetailCodeFragment create(String owner, String repo) {
-        RepoDetailCodeFragment fragment = new RepoDetailCodeFragment();
+    public static RepoCodeFragment create(String owner, String repo) {
+        RepoCodeFragment fragment = new RepoCodeFragment();
         Bundle bundle = new Bundle();
         bundle.putString(IntentExtra.KEY_OWNER, owner);
         bundle.putString(IntentExtra.KEY_REPO, repo);
@@ -36,10 +36,10 @@ public class RepoDetailCodeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Bundle arguments = getArguments();
-        mPathFragment = new RepoDetailCodePathFragment();
+        mPathFragment = new RepoCodePathFragment();
         mPathFragment.setArguments(new Bundle(arguments));
 
-        mListFragment = new RepoDetailCodeListFragment();
+        mListFragment = new RepoCodeListFragment();
         mListFragment.setArguments(new Bundle(arguments));
 
         FragmentManager fm = getChildFragmentManager();

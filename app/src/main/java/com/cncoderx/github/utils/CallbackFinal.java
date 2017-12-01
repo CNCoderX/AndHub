@@ -19,16 +19,17 @@ public abstract class CallbackFinal<T> implements Callback<T> {
     public final void onResponse(Call<T> call, Response<T> response) {
         if (response.isSuccessful()) {
             onSuccess(response.body());
+            onPostResponse(true);
         } else {
             onFailure(response.errorBody());
+            onPostResponse(false);
         }
-        onPostResponse();
     }
 
     @Override
     public final void onFailure(Call<T> call, Throwable t) {
         onError(t);
-        onPostResponse();
+        onPostResponse(false);
     }
 
     public abstract void onSuccess(T t);
@@ -45,7 +46,7 @@ public abstract class CallbackFinal<T> implements Callback<T> {
         }
     }
 
-    public void onPostResponse() {
+    public void onPostResponse(boolean successful) {
 
     }
 

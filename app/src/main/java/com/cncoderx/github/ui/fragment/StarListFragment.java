@@ -10,7 +10,7 @@ import com.cncoderx.github.R;
 import com.cncoderx.github.sdk.ServiceGenerator;
 import com.cncoderx.github.sdk.model.Repository;
 import com.cncoderx.github.sdk.service.IRepositoryService;
-import com.cncoderx.github.ui.activity.RepoDetailActivity;
+import com.cncoderx.github.ui.activity.RepositoryActivity;
 import com.cncoderx.github.ui.adapter.RepoListAdapter;
 import com.cncoderx.github.utils.IntentExtra;
 import com.cncoderx.github.utils.ListCallback;
@@ -29,10 +29,20 @@ import retrofit2.Call;
 public class StarListFragment extends SwipeRecyclerViewFragment implements OnItemClickListener, OnLoadMoreListener {
     private RepoListAdapter mAdapter = new RepoListAdapter();
     private ListCallback<Repository> mCallback = new ListCallback<>(mAdapter);
+    private String mUser;
+
+    public static StarListFragment create(String user) {
+        StarListFragment fragment = new StarListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentExtra.KEY_USER, user);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mUser = getArguments().getString(IntentExtra.KEY_USER);
         setAdapter(mAdapter);
         setOnItemClickListener(this);
         RecyclerViewHelper.setLoadMoreListener(
@@ -51,14 +61,14 @@ public class StarListFragment extends SwipeRecyclerViewFragment implements OnIte
     @Override
     public void load(RecyclerView recyclerView, ILoadingView loadingView) {
         IRepositoryService service = ServiceGenerator.create(IRepositoryService.class);
-        Call<List<Repository>> call = service.getStarredRepositories();
+        Call<List<Repository>> call = service.getStarredRepositories(mUser);
         mCallback.setLoadingView(loadingView).queueTo(call, false);
     }
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View view, int position, long id) {
         Repository repository = mAdapter.get(position);
-        Intent intent = new Intent(getActivity(), RepoDetailActivity.class);
+        Intent intent = new Intent(getActivity(), RepositoryActivity.class);
         intent.putExtra(IntentExtra.KEY_REPO, repository.fullName);
         intent.putExtra(IntentExtra.KEY_OWNER, repository.owner.login);
         intent.putExtra(IntentExtra.KEY_REPO, repository.name);
@@ -68,7 +78,7 @@ public class StarListFragment extends SwipeRecyclerViewFragment implements OnIte
     @Override
     public void onRefresh() {
         IRepositoryService service = ServiceGenerator.create(IRepositoryService.class);
-        Call<List<Repository>> call = service.getStarredRepositories();
+        Call<List<Repository>> call = service.getStarredRepositories(mUser);
         mCallback.setRefreshView(getSwipeRefreshLayout()).queueTo(call, true);
     }
 }

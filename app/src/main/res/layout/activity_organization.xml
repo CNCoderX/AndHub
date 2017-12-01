@@ -121,10 +121,12 @@
                 android:text="@string/zero"
                 style="@style/counter_text"/>
 
-            <ImageView
+            <com.cncoderx.github.ui.view.IconView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/enter"/>
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/theme_black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -159,10 +161,12 @@
                 android:text="@string/zero"
                 style="@style/counter_text"/>
 
-            <ImageView
+            <com.cncoderx.github.ui.view.IconView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/enter"/>
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/theme_black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -197,10 +201,12 @@
                 android:text="@string/zero"
                 style="@style/counter_text"/>
 
-            <ImageView
+            <com.cncoderx.github.ui.view.IconView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/enter"/>
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/theme_black"/>
         </LinearLayout>
     </android.support.v7.widget.LinearLayoutCompat>
 </LinearLayout>

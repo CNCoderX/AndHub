@@ -17,6 +17,12 @@ import retrofit2.http.Path;
  */
 public interface IGistService {
 
+    @GET("gists")
+    Call<List<Gist>> getGists();
+
+    @GET("users/{user}/gists")
+    Call<List<Gist>> getGists(@Path("user") String user);
+
     @GET("gists/public")
     Call<List<Gist>> getPublicGists();
 

@@ -50,7 +50,7 @@ public abstract class ButtonSwitcher {
             }
 
             @Override
-            public void onPostResponse() {
+            public void onPostResponse(boolean successful) {
                 mButton.setClickable(true);
             }
         });
@@ -67,7 +67,7 @@ public abstract class ButtonSwitcher {
             }
 
             @Override
-            public void onPostResponse() {
+            public void onPostResponse(boolean successful) {
                 mButton.setClickable(true);
             }
         });
@@ -84,7 +84,7 @@ public abstract class ButtonSwitcher {
             }
 
             @Override
-            public void onPostResponse() {
+            public void onPostResponse(boolean successful) {
                 mButton.setClickable(true);
             }
         });

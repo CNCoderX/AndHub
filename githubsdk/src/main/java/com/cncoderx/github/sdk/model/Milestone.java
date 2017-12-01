@@ -3,6 +3,7 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -47,10 +48,10 @@ public class Milestone implements Parcelable {
         creator = in.readParcelable(User.class.getClassLoader());
         openIssues = in.readInt();
         closedIssues = in.readInt();
-        createdAt = DateParcel.readDate(in);
-        updatedAt = DateParcel.readDate(in);
-        closedAt = DateParcel.readDate(in);
-        dueOn = DateParcel.readDate(in);
+        createdAt = DateParcel.read(in);
+        updatedAt = DateParcel.read(in);
+        closedAt = DateParcel.read(in);
+        dueOn = DateParcel.read(in);
     }
 
     @Override
@@ -66,10 +67,10 @@ public class Milestone implements Parcelable {
         dest.writeParcelable(creator, flags);
         dest.writeInt(openIssues);
         dest.writeInt(closedIssues);
-        DateParcel.writeDate(createdAt, dest);
-        DateParcel.writeDate(updatedAt, dest);
-        DateParcel.writeDate(closedAt, dest);
-        DateParcel.writeDate(dueOn, dest);
+        DateParcel.write(createdAt, dest);
+        DateParcel.write(updatedAt, dest);
+        DateParcel.write(closedAt, dest);
+        DateParcel.write(dueOn, dest);
     }
 
     @Override

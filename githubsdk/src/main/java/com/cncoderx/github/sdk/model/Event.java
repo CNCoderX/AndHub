@@ -3,6 +3,8 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
+import com.cncoderx.github.sdk.parcel.EnumParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -28,13 +30,13 @@ public class Event implements Parcelable {
 
     protected Event(Parcel in) {
         id = in.readString();
-        type = EventType.values()[in.readInt()];
+        type = EnumParcel.read(in, EventType.class);
         isPublic = in.readByte() != 0;
 //        payload = in.readParcelable(Payload.class.getClassLoader());
         repo = in.readParcelable(Repo.class.getClassLoader());
         actor = in.readParcelable(User.class.getClassLoader());
         org = in.readParcelable(User.class.getClassLoader());
-        createdAt = DateParcel.readDate(in);
+        createdAt = DateParcel.read(in);
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -57,13 +59,13 @@ public class Event implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
-        dest.writeInt(type.ordinal());
+        EnumParcel.write(type, dest);
         dest.writeByte((byte) (isPublic ? 1 : 0));
 //        dest.writeParcelable(payload, flags);
         dest.writeParcelable(repo, flags);
         dest.writeParcelable(actor, flags);
         dest.writeParcelable(org, flags);
-        DateParcel.writeDate(createdAt, dest);
+        DateParcel.write(createdAt, dest);
     }
 
     public static class Repo implements Parcelable {

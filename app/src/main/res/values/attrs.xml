@@ -33,4 +33,12 @@
         <attr name="ivIsLoop" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="LinearGradientTextView">
+        <attr name="startColor" format="color" />
+        <attr name="centerColor" format="color" />
+        <attr name="endColor" format="color" />
+        <attr name="duration" format="integer" />
+        <attr name="gradientWidth" format="dimension" />
+    </declare-styleable>
+
 </resources>

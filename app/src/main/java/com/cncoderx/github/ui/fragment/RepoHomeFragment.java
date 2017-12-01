@@ -29,7 +29,7 @@ import retrofit2.Call;
 /**
  * @author cncoderx
  */
-public class RepoDetailHomeFragment extends Fragment {
+public class RepoHomeFragment extends Fragment {
     @BindView(R.id.tv_repo_detail_watched_count)
     TextView tvWatched;
 
@@ -47,8 +47,8 @@ public class RepoDetailHomeFragment extends Fragment {
 
     private String mOwner, mRepo;
 
-    public static RepoDetailHomeFragment create(String owner, String repo) {
-        RepoDetailHomeFragment fragment = new RepoDetailHomeFragment();
+    public static RepoHomeFragment create(String owner, String repo) {
+        RepoHomeFragment fragment = new RepoHomeFragment();
         Bundle bundle = new Bundle();
         bundle.putString(IntentExtra.KEY_OWNER, owner);
         bundle.putString(IntentExtra.KEY_REPO, repo);

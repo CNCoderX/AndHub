@@ -13,12 +13,18 @@ import retrofit2.http.Path;
  * @author cncoderx
  */
 public interface IIssuesService {
+
     @GET("repos/{owner}/{repo}/issues")
-    Call<List<Issue>> getIssuesList(@Path("owner") String owner,
-                                    @Path("repo") String repo);
+    Call<List<Issue>> getIssues(@Path("owner") String owner,
+                                @Path("repo") String repo);
+
+    @GET("repos/{owner}/{repo}/issues/{number}")
+    Call<Issue> getIssue(@Path("owner") String owner,
+                         @Path("repo") String repo,
+                         @Path("number") String number);
 
     @GET ("repos/{owner}/{repo}/issues/{number}/comments")
-    Call<List<Comment>> getIssuesComments(@Path("owner") String owner,
-                                          @Path("repo") String repo,
-                                          @Path("number") String number);
+    Call<List<Comment>> getComments(@Path("owner") String owner,
+                                    @Path("repo") String repo,
+                                    @Path("number") String number);
 }

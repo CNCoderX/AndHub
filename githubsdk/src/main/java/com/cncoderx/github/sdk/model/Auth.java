@@ -3,6 +3,7 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -29,8 +30,8 @@ public class Auth implements Parcelable {
         scopes = in.createStringArray();
         token = in.readString();
         note = in.readString();
-        createdAt = DateParcel.readDate(in);
-        updatedAt = DateParcel.readDate(in);
+        createdAt = DateParcel.read(in);
+        updatedAt = DateParcel.read(in);
         fingerprint = in.readString();
         app = in.readParcelable(App.class.getClassLoader());
         user = in.readParcelable(User.class.getClassLoader());
@@ -59,8 +60,8 @@ public class Auth implements Parcelable {
         dest.writeStringArray(scopes);
         dest.writeString(token);
         dest.writeString(note);
-        DateParcel.writeDate(createdAt, dest);
-        DateParcel.writeDate(updatedAt, dest);
+        DateParcel.write(createdAt, dest);
+        DateParcel.write(updatedAt, dest);
         dest.writeString(fingerprint);
         dest.writeParcelable(app, flags);
         dest.writeParcelable(user, flags);

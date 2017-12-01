@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +15,7 @@ import com.cncoderx.github.sdk.model.Comment;
 import com.cncoderx.github.sdk.model.PullRequest;
 import com.cncoderx.github.sdk.service.IPullsService;
 import com.cncoderx.github.ui.adapter.CommentAdapter;
+import com.cncoderx.github.utils.CallbackFinal;
 import com.cncoderx.github.utils.IntentExtra;
 import com.cncoderx.github.utils.ListCallback;
 import com.cncoderx.github.utils.TimeFormatter;
@@ -31,45 +30,47 @@ import retrofit2.Call;
 /**
  * @author cncoderx
  */
-public class PullCommentActivity extends BaseActivity {
-    @BindView(R.id.rv_pull_comment_list)
-    RecyclerView rvComment;
-
-    private ListCallback<Comment> mListCallback;
+public class PullCommentActivity extends RecyclerViewActivity {
+    private CommentAdapter mAdapter = new CommentAdapter();
+    private ListCallback<Comment> mCallback = new ListCallback<>(mAdapter);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pull_comment);
-        ButterKnife.bind(this);
-
         Intent intent = getIntent();
         String owner = intent.getStringExtra(IntentExtra.KEY_OWNER);
         String repo = intent.getStringExtra(IntentExtra.KEY_REPO);
-        int number = intent.getIntExtra("number", 0);
-        PullRequest pull = intent.getParcelableExtra("pull_request");
+        int number = intent.getIntExtra(IntentExtra.KEY_NUMBER, 0);
 
-        Comment comment = new Comment();
-        comment.user = pull.user;
-        comment.body = pull.body;
-        comment.createdAt = pull.createdAt;
-        comment.updatedAt = pull.updatedAt;
-        CommentAdapter adapter = new CommentAdapter(comment);
+        setAdapter(mAdapter);
 
-        RecyclerViewHelper.setLinearLayout(rvComment);
-        RecyclerViewHelper.setAdapter(rvComment, adapter);
-        RecyclerViewHelper.setDivider(rvComment,
-                ContextCompat.getDrawable(this, R.drawable.list_divider),
-                getResources().getDimensionPixelOffset(R.dimen.divider_height));
+        callHeaderData(owner, repo, number);
+        callPullComments(owner, repo, number);
+    }
 
-        View headerView = new HeaderViewBuilder(this).build(pull);
-        RecyclerViewHelper.addHeaderView(rvComment, headerView);
-
-        mListCallback = new ListCallback<>(adapter, false);
-
+    private void callHeaderData(String owner, String repo, int number) {
         IPullsService service = ServiceGenerator.create(IPullsService.class);
-        Call<List<Comment>> call = service.getPullsComments(owner, repo, Integer.toString(number));
-        mListCallback.queueTo(call);
+        Call<PullRequest> call = service.getPullRequest(owner, repo, Integer.toString(number));
+        call.enqueue(new CallbackFinal<PullRequest>() {
+            @Override
+            public void onSuccess(PullRequest pull) {
+                Comment comment = new Comment();
+                comment.user = pull.user;
+                comment.body = pull.body;
+                comment.createdAt = pull.createdAt;
+                comment.updatedAt = pull.updatedAt;
+                mAdapter.add(0, comment);
+
+                View headerView = new PullCommentActivity.HeaderViewBuilder(PullCommentActivity.this).build(pull);
+                RecyclerViewHelper.addHeaderView(getRecyclerView(), headerView);
+            }
+        });
+    }
+
+    private void callPullComments(String owner, String repo, int number) {
+        IPullsService service = ServiceGenerator.create(IPullsService.class);
+        Call<List<Comment>> call = service.getComments(owner, repo, Integer.toString(number));
+        mCallback.queueTo(call);
     }
 
     class HeaderViewBuilder {
@@ -91,7 +92,8 @@ public class PullCommentActivity extends BaseActivity {
         View headerView;
 
         public HeaderViewBuilder(Context context) {
-            headerView = LayoutInflater.from(context).inflate(R.layout.item_pulls_header, rvComment, false);
+            headerView = LayoutInflater.from(context).inflate(
+                    R.layout.item_pulls_header, getRecyclerView(), false);
             ButterKnife.bind(this, headerView);
         }
 

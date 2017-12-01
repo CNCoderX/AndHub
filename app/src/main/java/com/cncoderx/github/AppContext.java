@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 
+import com.cncoderx.github.accounts.GitAccountManager;
 import com.cncoderx.github.preference.SettingPreference;
 import com.cncoderx.github.sdk.AuthorizationInterceptor;
 import com.cncoderx.github.sdk.HttpConfig;
@@ -32,6 +33,8 @@ public class AppContext extends Application {
         super.onCreate();
         instance = this;
 
+        GitAccountManager.initialize(this);
+
         AuthorizationInterceptor.addAccessURLPath("/applications");
         AuthorizationInterceptor.addAccessURLPath("/authorizations");
 
@@ -43,30 +46,17 @@ public class AppContext extends Application {
 
         Typefaces.replaceSystemDefaultFont(this, "Arial.ttf");
 
-        int lang = new SettingPreference(this).getLanguage();
-        switch (lang) {
-            case 0:
-                setLocale(Locale.getDefault());
-                break;
-            case 1:
-                setLocale(Locale.ENGLISH);
-                break;
-            case 2:
-                setLocale(Locale.SIMPLIFIED_CHINESE);
-                break;
-            case 3:
-                setLocale(Locale.TRADITIONAL_CHINESE);
-                break;
-        }
+        Locale locale = new SettingPreference(this).getLocale();
+        setLocale(locale);
     }
 
-    public String getLoginName() {
-        return TokenStore.getInstance(this).getName();
-    }
-
-    public void setLoginName(String loginName) {
-        TokenStore.getInstance(this).setName(loginName);
-    }
+//    public String getLoginName() {
+//        return TokenStore.getInstance(this).getName();
+//    }
+//
+//    public void setLoginName(String loginName) {
+//        TokenStore.getInstance(this).setName(loginName);
+//    }
 
     public void setToken(String token) {
         TokenStore.getInstance(this).setToken(token);

@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:text="@string/root"
-    android:textColor="@color/white"
-    android:textSize="15sp"/>
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <com.cncoderx.github.ui.view.IconView
+        android:id="@android:id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ic_enter"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/root"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
+</LinearLayout>

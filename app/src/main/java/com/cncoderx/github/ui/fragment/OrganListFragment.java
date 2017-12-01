@@ -10,7 +10,7 @@ import com.cncoderx.github.R;
 import com.cncoderx.github.sdk.ServiceGenerator;
 import com.cncoderx.github.sdk.model.User;
 import com.cncoderx.github.sdk.service.IUserService;
-import com.cncoderx.github.ui.activity.OrganizationActivity;
+import com.cncoderx.github.ui.activity.ProfileActivity;
 import com.cncoderx.github.ui.adapter.UserListAdapter;
 import com.cncoderx.github.utils.IntentExtra;
 import com.cncoderx.github.utils.ListCallback;
@@ -26,10 +26,20 @@ import retrofit2.Call;
 public class OrganListFragment extends SwipeRecyclerViewFragment implements OnItemClickListener {
     private UserListAdapter mAdapter = new UserListAdapter();
     private ListCallback<User> mCallback = new ListCallback<>(mAdapter, false);
+    private String mUser;
+
+    public static OrganListFragment create(String user) {
+        OrganListFragment fragment = new OrganListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentExtra.KEY_USER, user);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mUser = getArguments().getString(IntentExtra.KEY_USER);
         setAdapter(mAdapter);
         setOnItemClickListener(this);
         setEmptyText(getString(R.string.no_organs));
@@ -46,15 +56,15 @@ public class OrganListFragment extends SwipeRecyclerViewFragment implements OnIt
     @Override
     public void onItemClick(RecyclerView recyclerView, View view, int position, long id) {
         User organ = mAdapter.get(position);
-        Intent intent = new Intent(getActivity(), OrganizationActivity.class);
-        intent.putExtra(IntentExtra.KEY_ORGAN, organ.login);
+        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+        intent.putExtra(IntentExtra.KEY_USER, organ.login);
         startActivity(intent);
     }
 
     @Override
     public void onRefresh() {
         IUserService service = ServiceGenerator.create(IUserService.class);
-        Call<List<User>> call = service.getOrgans();
+        Call<List<User>> call = service.getOrgans(mUser);
         mCallback.setRefreshView(getSwipeRefreshLayout()).queueTo(call, true);
     }
 }

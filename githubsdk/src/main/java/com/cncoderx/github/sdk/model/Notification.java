@@ -3,6 +3,7 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -27,8 +28,8 @@ public class Notification implements Parcelable {
         subject = in.readParcelable(Subject.class.getClassLoader());
         reason = in.readString();
         unread = in.readByte() != 0;
-        updatedAt = DateParcel.readDate(in);
-        readAt = DateParcel.readDate(in);
+        updatedAt = DateParcel.read(in);
+        readAt = DateParcel.read(in);
     }
 
     public static final Creator<Notification> CREATOR = new Creator<Notification>() {
@@ -55,8 +56,8 @@ public class Notification implements Parcelable {
         dest.writeParcelable(subject, flags);
         dest.writeString(reason);
         dest.writeByte((byte) (unread ? 1 : 0));
-        DateParcel.writeDate(updatedAt, dest);
-        DateParcel.writeDate(readAt, dest);
+        DateParcel.write(updatedAt, dest);
+        DateParcel.write(readAt, dest);
     }
 
     public static class Subject implements Parcelable {

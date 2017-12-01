@@ -3,6 +3,7 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -39,8 +40,8 @@ public class Gist implements Parcelable {
         files = readFilesMap(in);
         truncated = in.readByte() != 0;
         comments = in.readInt();
-        createdAt = DateParcel.readDate(in);
-        updatedAt = DateParcel.readDate(in);
+        createdAt = DateParcel.read(in);
+        updatedAt = DateParcel.read(in);
         forks = in.createTypedArray(Gist.CREATOR);
         history = in.createTypedArray(History.CREATOR);
     }
@@ -97,8 +98,8 @@ public class Gist implements Parcelable {
         writeFilesMap(files, dest, flags);
         dest.writeByte((byte) (truncated ? 1 : 0));
         dest.writeInt(comments);
-        DateParcel.writeDate(createdAt, dest);
-        DateParcel.writeDate(updatedAt, dest);
+        DateParcel.write(createdAt, dest);
+        DateParcel.write(updatedAt, dest);
         dest.writeTypedArray(forks, flags);
         dest.writeTypedArray(history, flags);
     }
@@ -160,7 +161,7 @@ public class Gist implements Parcelable {
         protected History(Parcel in) {
             version = in.readString();
             user = in.readParcelable(User.class.getClassLoader());
-            committedAt = DateParcel.readDate(in);
+            committedAt = DateParcel.read(in);
             changeStatus = in.readParcelable(Status.class.getClassLoader());
         }
 
@@ -185,7 +186,7 @@ public class Gist implements Parcelable {
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(version);
             dest.writeParcelable(user, flags);
-            DateParcel.writeDate(committedAt, dest);
+            DateParcel.write(committedAt, dest);
             dest.writeParcelable(changeStatus, flags);
         }
     }

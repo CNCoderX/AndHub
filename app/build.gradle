@@ -39,6 +39,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     //    compile 'com.android.support:design:25.3.1'
 
@@ -52,5 +53,7 @@ dependencies {
     //        exclude group: 'com.google.code.findbugs', module: 'jsr305'
     //        exclude module: 'jsr305:2.0.1'
     //    }
-    compile project(':githubsdk')
+//    compile project(':githubsdk')
+    releaseCompile project(path: ':githubsdk', configuration: 'release')
+    debugCompile project(path: ':githubsdk', configuration: 'debug')
 }

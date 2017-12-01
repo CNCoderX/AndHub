@@ -3,6 +3,7 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -46,10 +47,10 @@ public class PullRequest implements Parcelable {
         milestone = in.readParcelable(Milestone.class.getClassLoader());
         locked = in.readByte() != 0;
         comments = in.readInt();
-        closedAt = DateParcel.readDate(in);
-        createdAt = DateParcel.readDate(in);
-        updatedAt = DateParcel.readDate(in);
-        mergedAt = DateParcel.readDate(in);
+        closedAt = DateParcel.read(in);
+        createdAt = DateParcel.read(in);
+        updatedAt = DateParcel.read(in);
+        mergedAt = DateParcel.read(in);
     }
 
     public static final Creator<PullRequest> CREATOR = new Creator<PullRequest>() {
@@ -83,9 +84,9 @@ public class PullRequest implements Parcelable {
         dest.writeParcelable(milestone, flags);
         dest.writeByte((byte) (locked ? 1 : 0));
         dest.writeInt(comments);
-        DateParcel.writeDate(closedAt, dest);
-        DateParcel.writeDate(createdAt, dest);
-        DateParcel.writeDate(updatedAt, dest);
-        DateParcel.writeDate(mergedAt, dest);
+        DateParcel.write(closedAt, dest);
+        DateParcel.write(createdAt, dest);
+        DateParcel.write(updatedAt, dest);
+        DateParcel.write(mergedAt, dest);
     }
 }

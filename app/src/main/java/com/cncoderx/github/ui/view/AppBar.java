@@ -2,9 +2,10 @@ package com.cncoderx.github.ui.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -57,9 +58,16 @@ public class AppBar extends LinearLayout {
 
         if (context instanceof Activity) {
             Activity activity = (Activity) context;
-            CharSequence title = activity.getTitle();
-            if (!TextUtils.isEmpty(title)) {
-                setTitle(title);
+            activity.getComponentName();
+            PackageManager pm = context.getPackageManager();
+            try {
+                ActivityInfo info = pm.getActivityInfo(activity.getComponentName(), PackageManager.GET_META_DATA);
+                if (info.labelRes > 0) {
+                    CharSequence title = context.getString(info.labelRes);
+                    setTitle(title);
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }

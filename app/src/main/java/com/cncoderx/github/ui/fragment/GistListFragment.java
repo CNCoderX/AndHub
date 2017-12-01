@@ -8,8 +8,8 @@ import android.view.View;
 
 import com.cncoderx.github.R;
 import com.cncoderx.github.sdk.ServiceGenerator;
-import com.cncoderx.github.sdk.service.IGistService;
 import com.cncoderx.github.sdk.model.Gist;
+import com.cncoderx.github.sdk.service.IGistService;
 import com.cncoderx.github.ui.activity.GistActivity;
 import com.cncoderx.github.ui.adapter.GistListAdapter;
 import com.cncoderx.github.utils.IntentExtra;
@@ -29,10 +29,20 @@ import retrofit2.Call;
 public class GistListFragment extends SwipeRecyclerViewFragment implements OnItemClickListener, OnLoadMoreListener {
     private GistListAdapter mAdapter = new GistListAdapter();
     private ListCallback<Gist> mCallback = new ListCallback<>(mAdapter);
+    private String mUser;
+
+    public static GistListFragment create(String user) {
+        GistListFragment fragment = new GistListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentExtra.KEY_USER, user);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mUser = getArguments().getString(IntentExtra.KEY_USER);
         setAdapter(mAdapter);
         setOnItemClickListener(this);
         RecyclerViewHelper.setLoadMoreListener(
@@ -51,14 +61,14 @@ public class GistListFragment extends SwipeRecyclerViewFragment implements OnIte
     @Override
     public void onRefresh() {
         IGistService service = ServiceGenerator.create(IGistService.class);
-        Call<List<Gist>> call = service.getPublicGists();
+        Call<List<Gist>> call = service.getGists(mUser);
         mCallback.setRefreshView(getSwipeRefreshLayout()).queueTo(call, true);
     }
 
     @Override
     public void load(RecyclerView recyclerView, ILoadingView loadingView) {
         IGistService service = ServiceGenerator.create(IGistService.class);
-        Call<List<Gist>> call = service.getPublicGists();
+        Call<List<Gist>> call = service.getGists(mUser);
         mCallback.setLoadingView(loadingView).queueTo(call, false);
     }
 

@@ -51,4 +51,7 @@ public interface IUserService {
 
     @GET("users/{user}/orgs")
     Call<List<User>> getOrgans(@Path("user") String user);
+
+    @GET("orgs/{org}/members")
+    Call<List<User>> getOrganMembers(@Path("org") String org);
 }

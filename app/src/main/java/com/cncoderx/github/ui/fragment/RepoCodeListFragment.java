@@ -1,7 +1,6 @@
 package com.cncoderx.github.ui.fragment;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,10 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.cncoderx.github.R;
 import com.cncoderx.github.sdk.ServiceGenerator;
 import com.cncoderx.github.sdk.model.Contents;
 import com.cncoderx.github.sdk.service.IContentsService;
-import com.cncoderx.github.ui.activity.CodeContentActivity;
+import com.cncoderx.github.ui.activity.TextFileReviewActivity;
 import com.cncoderx.github.ui.adapter.FileListAdapter;
 import com.cncoderx.github.utils.IntentExtra;
 import com.cncoderx.github.utils.ListCallback;
@@ -29,7 +29,7 @@ import retrofit2.Response;
 /**
  * @author cncoderx
  */
-public class RepoDetailCodeListFragment extends RecyclerViewFragment implements OnItemClickListener {
+public class RepoCodeListFragment extends RecyclerViewFragment implements OnItemClickListener {
     private FileListAdapter mListAdapter = new FileListAdapter();
     private SortedListCallback mCallback = new SortedListCallback(mListAdapter);
 
@@ -42,6 +42,8 @@ public class RepoDetailCodeListFragment extends RecyclerViewFragment implements 
         mRepo = getArguments().getString(IntentExtra.KEY_REPO);
         setAdapter(mListAdapter);
         setOnItemClickListener(this);
+        setEmptyText(getString(R.string.no_files));
+        mCallback.setEmptyView(getEmptyView());
     }
 
     @Override
@@ -68,8 +70,9 @@ public class RepoDetailCodeListFragment extends RecyclerViewFragment implements 
             } else {
                 String url = contents.downloadUrl;
                 if (!TextUtils.isEmpty(url)) {
-                    Intent intent = new Intent(getActivity(), CodeContentActivity.class);
-                    intent.setData(Uri.parse(url));
+                    Intent intent = new Intent(getActivity(), TextFileReviewActivity.class);
+                    intent.putExtra(IntentExtra.KEY_NAME, contents.name);
+                    intent.putExtra(IntentExtra.KEY_PATH, url);
                     startActivity(intent);
                 }
             }
@@ -77,7 +80,7 @@ public class RepoDetailCodeListFragment extends RecyclerViewFragment implements 
     }
 
     public void sendUpdateBroadcast(String path) {
-        ((RepoDetailCodeFragment) getParentFragment()).update(path);
+        ((RepoCodeFragment) getParentFragment()).update(path);
 //        Intent intent = new Intent(RepoDetailCodeFragment.ACTION);
 //        intent.putExtra(IntentExtra.KEY_PATH, path);
 //        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);

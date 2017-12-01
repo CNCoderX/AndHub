@@ -3,6 +3,8 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
+import com.cncoderx.github.sdk.parcel.EnumParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -17,7 +19,7 @@ public class Profile implements Parcelable {
     public String avatarId;
     @SerializedName("avatar_url")
     public String avatarUrl;
-    public String type;
+    public User.Type type;
     @SerializedName("description")
     public String desc; // only for organization
     @SerializedName("site_admin")
@@ -57,7 +59,7 @@ public class Profile implements Parcelable {
         login = in.readString();
         avatarId = in.readString();
         avatarUrl = in.readString();
-        type = in.readString();
+        type = EnumParcel.read(in, User.Type.class);
         desc = in.readString();
         isAdmin = in.readByte() != 0;
         name = in.readString();
@@ -71,8 +73,8 @@ public class Profile implements Parcelable {
         publicGists = in.readInt();
         followers = in.readInt();
         following = in.readInt();
-        createdAt = DateParcel.readDate(in);
-        updatedAt = DateParcel.readDate(in);
+        createdAt = DateParcel.read(in);
+        updatedAt = DateParcel.read(in);
         privateRepos = in.readInt();
         privateGists = in.readInt();
         diskUsage = in.readInt();
@@ -103,7 +105,7 @@ public class Profile implements Parcelable {
         dest.writeString(login);
         dest.writeString(avatarId);
         dest.writeString(avatarUrl);
-        dest.writeString(type);
+        EnumParcel.write(type, dest);
         dest.writeString(desc);
         dest.writeByte((byte) (isAdmin ? 1 : 0));
         dest.writeString(name);
@@ -117,8 +119,8 @@ public class Profile implements Parcelable {
         dest.writeInt(publicGists);
         dest.writeInt(followers);
         dest.writeInt(following);
-        DateParcel.writeDate(createdAt, dest);
-        DateParcel.writeDate(updatedAt, dest);
+        DateParcel.write(createdAt, dest);
+        DateParcel.write(updatedAt, dest);
         dest.writeInt(privateRepos);
         dest.writeInt(privateGists);
         dest.writeInt(diskUsage);

@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:scaleType="centerInside"
         android:textSize="20sp"
-        android:textColor="@color/tab_text_selector"/>
+        android:textColor="@color/select_text_light"/>
 
     <TextView
         android:id="@android:id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:textColor="@color/tab_text_selector"
+        android:textColor="@color/select_text_light"
         android:textSize="14sp"/>
 </LinearLayout>

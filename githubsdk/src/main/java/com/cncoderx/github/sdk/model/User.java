@@ -3,6 +3,7 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.EnumParcel;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -15,7 +16,7 @@ public class User implements Parcelable {
     public String avatarId;
     @SerializedName("avatar_url")
     public String avatarUrl;
-    public String type; // user or organization
+    public Type type; // user or organization
     @SerializedName("description")
     public String desc; // only for organization
 
@@ -27,7 +28,7 @@ public class User implements Parcelable {
         login = in.readString();
         avatarId = in.readString();
         avatarUrl = in.readString();
-        type = in.readString();
+        type = EnumParcel.read(in, Type.class);
         desc = in.readString();
     }
 
@@ -54,7 +55,11 @@ public class User implements Parcelable {
         dest.writeString(login);
         dest.writeString(avatarId);
         dest.writeString(avatarUrl);
-        dest.writeString(type);
+        EnumParcel.write(type, dest);
         dest.writeString(desc);
+    }
+
+    public static enum Type {
+        User, Organization
     }
 }

@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/background</item>
-        <item name="android:typeface">monospace</item>
+        <!--<item name="android:typeface">monospace</item>-->
     </style>
 
     <style name="loading_dialog">
@@ -37,4 +37,13 @@
         <item name="android:paddingBottom">@dimen/box_vertical_padding</item>
     </style>
 
+    <style name="popup_menu_anim">
+        <item name="android:windowEnterAnimation">@anim/anim_menu_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_menu_exit</item>
+    </style>
+
+    <style name="expandable_list_anim">
+        <item name="android:windowEnterAnimation">@anim/anim_expandable_list_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_expandable_list_exit</item>
+    </style>
 </resources>

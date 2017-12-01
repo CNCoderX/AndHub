@@ -133,21 +133,6 @@ public class ListCallback<T> implements Callback<List<T>> {
         onPostResponse();
     }
 
-//    private int queryPageIndex(Call<List<T>> call) {
-//        HttpUrl httpUrl = call.request().url();
-//        String page = httpUrl.queryParameter("page");
-//        if (!TextUtils.isEmpty(page)) {
-//            int pageIndex;
-//            try {
-//                pageIndex = Integer.parseInt(page);
-//            } catch (NumberFormatException e) {
-//                throw new AssertionError();
-//            }
-//            return pageIndex;
-//        }
-//        return -1;
-//    }
-
     @Override
     public void onFailure(Call<List<T>> call, Throwable t) {
         onPostResponse();

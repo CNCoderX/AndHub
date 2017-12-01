@@ -2,4 +2,6 @@
 <resources>
     <item name="swipe_refresh_layout" type="id"/>
     <item name="recycler_view" type="id"/>
+
+    <item name="popup_background" type="drawable">@drawable/abc_popup_background_mtrl_mult</item>
 </resources>

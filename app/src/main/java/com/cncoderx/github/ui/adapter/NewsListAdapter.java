@@ -1,7 +1,9 @@
 package com.cncoderx.github.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.text.method.LinkMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,12 +37,14 @@ public class NewsListAdapter extends ObjectAdapter<Event> {
     @Override
     public void onBindViewHolder(BaseViewHolder viewHolder, Event event, int position) {
         Context context = viewHolder.itemView.getContext();
+        TextView tvTitle = viewHolder.getView(R.id.tv_news_title, TextView.class);
         EventType type = event.type;
         if (type != null) {
-            viewHolder.getView(R.id.tv_news_title, TextView.class).setText(
-                    type.getMessage(context, event, new EventMessageFactoryImpl()));
+            tvTitle.setText(type.getMessage(context, event, new EventMessageFactoryImpl()));
+            tvTitle.setMovementMethod(LinkMovementMethod.getInstance());
+            tvTitle.setHighlightColor(Color.TRANSPARENT);
         } else {
-            viewHolder.getView(R.id.tv_news_title, TextView.class).setText("");
+            tvTitle.setText("");
         }
         viewHolder.getView(R.id.tv_news_created, TextView.class).setText(
                 TimeFormatter.format(viewHolder.itemView.getContext(), event.createdAt));

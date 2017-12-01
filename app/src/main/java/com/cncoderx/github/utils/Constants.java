@@ -10,7 +10,7 @@ public class Constants {
     public static final int DEFAULT_CONNECT_TIMEOUT = 10;
     public static final int DEFAULT_READ_TIMEOUT = 10;
 
-    public static final String ACCOUNT_TYPE = "com.github";
+    public static final String ACCOUNT_TYPE = "com.cncoderx.github";
     public static final String TOKEN_TYPE = "access";
 
     public static final String CLIENT_ID = "a589a33e95411aa2fd71";

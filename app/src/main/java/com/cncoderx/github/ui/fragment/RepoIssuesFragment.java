@@ -8,10 +8,10 @@ import android.view.View;
 
 import com.cncoderx.github.R;
 import com.cncoderx.github.sdk.ServiceGenerator;
-import com.cncoderx.github.sdk.model.PullRequest;
-import com.cncoderx.github.sdk.service.IPullsService;
-import com.cncoderx.github.ui.activity.PullCommentActivity;
-import com.cncoderx.github.ui.adapter.PullsListAdapter;
+import com.cncoderx.github.sdk.model.Issue;
+import com.cncoderx.github.sdk.service.IIssuesService;
+import com.cncoderx.github.ui.activity.IssueCommentActivity;
+import com.cncoderx.github.ui.adapter.IssuesListAdapter;
 import com.cncoderx.github.utils.IntentExtra;
 import com.cncoderx.github.utils.ListCallback;
 import com.cncoderx.recyclerviewhelper.RecyclerViewHelper;
@@ -26,13 +26,13 @@ import retrofit2.Call;
 /**
  * @author cncoderx
  */
-public class RepoDetailPullsFragment extends RecyclerViewFragment implements OnItemClickListener, OnLoadMoreListener {
+public class RepoIssuesFragment extends RecyclerViewFragment implements OnItemClickListener, OnLoadMoreListener {
     private String mOwner, mRepo;
-    private PullsListAdapter mAdapter = new PullsListAdapter();
-    private ListCallback<PullRequest> mCallback = new ListCallback<>(mAdapter);
+    private IssuesListAdapter mAdapter = new IssuesListAdapter();
+    private ListCallback<Issue> mCallback = new ListCallback<>(mAdapter);
 
-    public static RepoDetailPullsFragment create(String owner, String repo) {
-        RepoDetailPullsFragment fragment = new RepoDetailPullsFragment();
+    public static RepoIssuesFragment create(String owner, String repo) {
+        RepoIssuesFragment fragment = new RepoIssuesFragment();
         Bundle bundle = new Bundle();
         bundle.putString(IntentExtra.KEY_OWNER, owner);
         bundle.putString(IntentExtra.KEY_REPO, repo);
@@ -47,7 +47,7 @@ public class RepoDetailPullsFragment extends RecyclerViewFragment implements OnI
         mRepo = getArguments().getString(IntentExtra.KEY_REPO);
         setAdapter(mAdapter);
         setOnItemClickListener(this);
-        setEmptyText(getString(R.string.no_pulls));
+        setEmptyText(getString(R.string.no_issues));
         RecyclerViewHelper.setLoadMoreListener(
                 getRecyclerView(), R.layout.item_loading_more, this);
         mCallback.setEmptyView(getEmptyView());
@@ -56,26 +56,25 @@ public class RepoDetailPullsFragment extends RecyclerViewFragment implements OnI
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        IPullsService service = ServiceGenerator.create(IPullsService.class);
-        Call<List<PullRequest>> call = service.getPullsList(mOwner, mRepo);
+        IIssuesService service = ServiceGenerator.create(IIssuesService.class);
+        Call<List<Issue>> call = service.getIssues(mOwner, mRepo);
         mCallback.queueTo(call, true);
     }
 
     @Override
     public void load(RecyclerView recyclerView, ILoadingView view) {
-        IPullsService service = ServiceGenerator.create(IPullsService.class);
-        Call<List<PullRequest>> call = service.getPullsList(mOwner, mRepo);
+        IIssuesService service = ServiceGenerator.create(IIssuesService.class);
+        Call<List<Issue>> call = service.getIssues(mOwner, mRepo);
         mCallback.setLoadingView(view).queueTo(call, false);
     }
 
     @Override
     public void onItemClick(RecyclerView recyclerView, View view, int position, long id) {
-        PullRequest pullRequest = mAdapter.get(position);
-        Intent intent = new Intent(getActivity(), PullCommentActivity.class);
-        intent.putExtra("owner", mOwner);
-        intent.putExtra("repo", mRepo);
-        intent.putExtra("number", pullRequest.number);
-        intent.putExtra("pull_request", pullRequest);
+        Issue issue = mAdapter.get(position);
+        Intent intent = new Intent(getActivity(), IssueCommentActivity.class);
+        intent.putExtra(IntentExtra.KEY_OWNER, mOwner);
+        intent.putExtra(IntentExtra.KEY_REPO, mRepo);
+        intent.putExtra(IntentExtra.KEY_NUMBER, issue.number);
         startActivity(intent);
     }
 }

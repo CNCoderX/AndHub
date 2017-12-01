@@ -5,6 +5,7 @@
     <dimen name="divider_height">1dp</dimen>
     <dimen name="app_bar_height">48dp</dimen>
     <dimen name="space_height">10dp</dimen>
+    <dimen name="menu_item_height">28dp</dimen>
     <dimen name="single_item_height">45dp</dimen>
     <dimen name="tab_pager_bottom_height">55dp</dimen>
 </resources>

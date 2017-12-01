@@ -3,6 +3,7 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -77,9 +78,9 @@ public class Repository implements Parcelable {
         isPrivate = in.readByte() != 0;
         description = in.readString();
         fork = in.readByte() != 0;
-        createdAt = DateParcel.readDate(in);
-        updatedAt = DateParcel.readDate(in);
-        pushedAt = DateParcel.readDate(in);
+        createdAt = DateParcel.read(in);
+        updatedAt = DateParcel.read(in);
+        pushedAt = DateParcel.read(in);
         size = in.readInt();
         starCount = in.readInt();
         watcherCount = in.readInt();
@@ -131,9 +132,9 @@ public class Repository implements Parcelable {
         dest.writeByte((byte) (isPrivate ? 1 : 0));
         dest.writeString(description);
         dest.writeByte((byte) (fork ? 1 : 0));
-        DateParcel.writeDate(createdAt, dest);
-        DateParcel.writeDate(updatedAt, dest);
-        DateParcel.writeDate(pushedAt, dest);
+        DateParcel.write(createdAt, dest);
+        DateParcel.write(updatedAt, dest);
+        DateParcel.write(pushedAt, dest);
         dest.writeInt(size);
         dest.writeInt(starCount);
         dest.writeInt(watcherCount);

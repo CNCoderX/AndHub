@@ -1,120 +1,79 @@
 package com.cncoderx.github.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.RecyclerView;
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.PopupWindowCompat;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.cncoderx.github.AppContext;
 import com.cncoderx.github.R;
-import com.cncoderx.github.preference.SearchOptionsPreference;
-import com.cncoderx.github.sdk.ServiceGenerator;
-import com.cncoderx.github.sdk.model.Repositories;
-import com.cncoderx.github.sdk.model.Repository;
-import com.cncoderx.github.sdk.service.ISearchService;
-import com.cncoderx.github.ui.adapter.RepoListAdapter;
-import com.cncoderx.github.ui.dialog.SearchOptionsDialog;
-import com.cncoderx.github.utils.IntentExtra;
-import com.cncoderx.recyclerviewhelper.RecyclerViewHelper;
-import com.cncoderx.recyclerviewhelper.listener.OnItemClickListener;
-import com.cncoderx.recyclerviewhelper.listener.OnLoadMoreListener;
-import com.cncoderx.recyclerviewhelper.utils.ILoadingView;
-
-import java.util.List;
-import java.util.Locale;
+import com.cncoderx.github.ui.fragment.SearchRepoFragment;
+import com.cncoderx.github.ui.fragment.SearchUserFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class SearchActivity extends BaseActivity implements OnLoadMoreListener {
+public class SearchActivity extends BaseActivity
+        implements TextView.OnEditorActionListener {
+    @BindView(R.id.ll_search_action_bar)
+    LinearLayout llActionBar;
+
     @BindView(R.id.et_search_key)
     EditText etSearchKey;
 
-    @BindView(R.id.rv_search_list)
-    RecyclerView rvSearchList;
+    private int mMenuTypeIndex = 0;
+    private int mMenuSortIndex = 0;
 
-    @BindView(R.id.ll_search_empty_layout)
-    LinearLayout llEmptyView;
-
-    @BindView(R.id.tv_search_empty_text)
-    TextView tvEmptyView;
-
-    @BindView(R.id.refresh_layout)
-    SwipeRefreshLayout refreshLayout;
-
-    private RepoListAdapter mAdapter;
-
-    private class RequestParam {
-        String key;
-        String sort;
-        String order;
-        int page = 1;
-        int pageSize = 30;
-    }
+    private SearchRepoFragment mRepoFragment;
+    private SearchUserFragment mUserFragment;
+    private Fragment currentFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.hide();
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
+        etSearchKey.setOnEditorActionListener(this);
+        mRepoFragment = new SearchRepoFragment();
+        mUserFragment = new SearchUserFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .add(R.id.container, mRepoFragment)
+                .add(R.id.container, mUserFragment)
+                .show(mRepoFragment)
+                .hide(mUserFragment)
+                .commit();
+    }
 
-        mAdapter = new RepoListAdapter();
-
-        RecyclerViewHelper.setLinearLayout(rvSearchList);
-        RecyclerViewHelper.setAdapter(rvSearchList, mAdapter);
-        RecyclerViewHelper.setDivider(rvSearchList,
-                ContextCompat.getDrawable(this, R.drawable.list_divider),
-                getResources().getDimensionPixelOffset(R.dimen.divider_height));
-        RecyclerViewHelper.setLoadMoreListener(rvSearchList, R.layout.item_loading_more, this);
-        RecyclerViewHelper.setOnItemClickListener(rvSearchList, new OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Repository repository = mAdapter.get(position);
-                Intent intent = new Intent(SearchActivity.this, RepoDetailActivity.class);
-                intent.putExtra(IntentExtra.KEY_OWNER, repository.owner.login);
-                intent.putExtra(IntentExtra.KEY_REPO, repository.name);
-                startActivity(intent);
-            }
-        });
-
-        refreshLayout.setEnabled(false);
-//        ILoadingView loadingView = RecyclerViewHelper.getLoadingView(rvSearchList);
-//        ImageView imageView = (ImageView) loadingView.getView().findViewById(R.id.tv_loading_view_show);
-//        Glide.with(this).asGif().load(R.mipmap.loading_small).into(imageView);
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            search();
+            return true;
+        }
+        return false;
     }
 
     @OnClick(R.id.iv_search_button)
     public void onSearch(View view) {
-        String key = etSearchKey.getText().toString().trim();
-        if (TextUtils.isEmpty(key)) {
-            etSearchKey.setText("");
-            etSearchKey.requestFocus();
-            return;
-        }
-        final RequestParam param = new RequestParam();
-        String keyOption = getKeyOption();
-        String[] sortAndOrder = getSortAndOrder();
-        param.key = key + keyOption;
-        param.sort = sortAndOrder[0];
-        param.order = sortAndOrder[1];
-        search(param, null);
-        rvSearchList.setTag(param);
-        refreshLayout.setRefreshing(true);
-
+        search();
         // 隐藏软键盘
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         if (imm != null) {
@@ -122,103 +81,179 @@ public class SearchActivity extends BaseActivity implements OnLoadMoreListener {
         }
     }
 
-    private String[] getSortAndOrder() {
-        int option = new SearchOptionsPreference(this).getSortOption();
-        switch (option) {
+    public void replaceFragment(Fragment show, Fragment hide) {
+        currentFragment = show;
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .show(show).hide(hide)
+                .commitAllowingStateLoss();
+    }
+
+    private void search() {
+        String key = etSearchKey.getText().toString().trim();
+        if (TextUtils.isEmpty(key)) {
+            etSearchKey.setText("");
+            etSearchKey.requestFocus();
+            return;
+        }
+
+        String sort = null;
+        String order = null;
+        switch (mMenuSortIndex) {
             case 1:
-                return new String[]{"stars", "desc"};
+                sort = "stars";
+                order = "desc";
+                break;
             case 2:
-                return new String[]{"stars", "asc"};
+                sort = "forks";
+                order = "desc";
+                break;
             case 3:
-                return new String[]{"forks", "desc"};
-            case 4:
-                return new String[]{"forks", "asc"};
-            case 5:
-                return new String[]{"updated", "desc"};
-            case 6:
-                return new String[]{"updated", "asc"};
-            default:
-                return new String[]{"", ""};
+                sort = "updated";
+                order = "desc";
+                break;
+        }
+
+        switch (mMenuTypeIndex) {
+            case 0:
+                if (currentFragment != mRepoFragment) {
+                    replaceFragment(mRepoFragment, mUserFragment);
+                }
+                mRepoFragment.search(key, sort, order, true);
+                break;
+            case 1:
+                if (currentFragment != mUserFragment) {
+                    replaceFragment(mUserFragment, mRepoFragment);
+                }
+                mUserFragment.search(key, sort, order, true);
+                break;
         }
     }
 
-    private String getKeyOption() {
-        int option = new SearchOptionsPreference(this).getLangOption();
-        String[] languages = getResources().getStringArray(R.array.search_lang_options);
-        if (option < 0
-                || languages[option].equals("Any Language")
-                || languages[option].equals("Other Language")) {
-            return "";
+    @OnClick(R.id.iv_search_header_icon)
+    public void onIconClick(View v) {
+        if (TextUtils.isEmpty(AppContext.getInstance().getToken())) {
+            Intent intent = new Intent(this, LoginActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         } else {
-            return String.format(Locale.US, "+language:%s", languages[option]);
+            Intent intent = new Intent(this, MainActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
     }
 
     @OnClick(R.id.iv_search_menu)
-    public void onMenuClick(View view) {
-        new SearchOptionsDialog().show(getFragmentManager(), "Options");
+    public void onMenuClick(View v) {
+//        new SearchOptionsDialog().show(getFragmentManager(), "Options");
+        new Menu(this).selectType(mMenuTypeIndex)
+                .selectSort(mMenuSortIndex)
+                .show(llActionBar, 0, 0, Gravity.RIGHT);
     }
 
-    @Override
-    public void load(RecyclerView recyclerView, ILoadingView view) {
-        RequestParam param = (RequestParam) recyclerView.getTag();
-        search(param, view);
-    }
+    class Menu implements RadioGroup.OnCheckedChangeListener {
+        PopupWindow mWindow;
 
-    private void search(final RequestParam param, @Nullable final ILoadingView view) {
-        ISearchService service = ServiceGenerator.create(ISearchService.class);
-        Call<Repositories> call = service.search(param.key, param.sort,
-                param.order, param.page, param.pageSize);
-        call.enqueue(new Callback<Repositories>() {
-            @Override
-            public void onResponse(Call<Repositories> call, Response<Repositories> response) {
-                boolean isCompleted = false;
-                if (response.isSuccessful()) {
-                    Repositories repositories = response.body();
-                    if (repositories != null) {
-                        if (view == null && mAdapter.size() > 0) {
-                            mAdapter.clear();
-                        }
-                        List<Repository> data = repositories.items;
-                        mAdapter.addAll(data);
-                        isCompleted = repositories.totalCount == mAdapter.size();
-                    }
-                    param.page++;
-                }
-                if (view != null) {
-                    if (isCompleted) {
-                        view.end();
-                    } else {
-                        view.hidden();
-                    }
-                }
-                onPostResponse();
-            }
+        @BindView(R.id.rg_search_menu_top)
+        RadioGroup mGroup1;
 
-            @Override
-            public void onFailure(Call<Repositories> call, Throwable t) {
-                t.printStackTrace();
-                if (view != null) {
-                    view.hidden();
-                }
-                onPostResponse();
-            }
-        });
-        if (view != null) {
-            view.show();
+        @BindView(R.id.rg_search_menu_bottom)
+        RadioGroup mGroup2;
+
+        public Menu(Context context) {
+            View v = LayoutInflater.from(context).inflate(R.layout.search_menu_layout, null);
+            ButterKnife.bind(this, v);
+            mWindow = new PopupWindow(v,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            mWindow.setTouchable(true);
+            mWindow.setOutsideTouchable(true);
+            mWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.popup_background));
+            mWindow.setAnimationStyle(R.style.popup_menu_anim);
+
+            mGroup1.setOnCheckedChangeListener(this);
+            mGroup2.setOnCheckedChangeListener(this);
         }
-    }
 
-    private void onPostResponse() {
-        String key = etSearchKey.getText().toString().trim();
-        if (mAdapter.size() == 0) {
-            tvEmptyView.setText(getString(R.string.search_no_result, key));
-            llEmptyView.setVisibility(View.VISIBLE);
-        } else {
-            llEmptyView.setVisibility(View.GONE);
+        public Menu selectType(int index) {
+            mGroup1.setOnCheckedChangeListener(null);
+            switch (index) {
+                case 0:
+                    mGroup1.check(R.id.tv_search_menu_repo);
+                    break;
+                case 1:
+                    mGroup1.check(R.id.tv_search_menu_user);
+                    break;
+            }
+            mGroup1.setOnCheckedChangeListener(this);
+            return this;
         }
-        if (refreshLayout.isRefreshing()) {
-            refreshLayout.setRefreshing(false);
+
+        public Menu selectSort(int index) {
+            mGroup2.setOnCheckedChangeListener(null);
+            switch (index) {
+                case 0:
+                    mGroup2.check(R.id.tv_search_menu_best_match);
+                    break;
+                case 1:
+                    mGroup2.check(R.id.tv_search_menu_most_stars);
+                    break;
+                case 2:
+                    mGroup2.check(R.id.tv_search_menu_most_forks);
+                    break;
+                case 3:
+                    mGroup2.check(R.id.tv_search_menu_recently);
+                    break;
+            }
+            mGroup2.setOnCheckedChangeListener(this);
+            return this;
+        }
+
+        public void show(View anchor, int xoff, int yoff, int gravity) {
+            if (!mWindow.isShowing()) {
+                PopupWindowCompat.showAsDropDown(mWindow, anchor, xoff, yoff, gravity);
+            }
+        }
+
+        @Override
+        public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+            if (group == mGroup1) {
+                switch (checkedId) {
+                    case R.id.tv_search_menu_repo:
+                        mMenuTypeIndex = 0;
+                        mWindow.dismiss();
+                        search();
+                        break;
+                    case R.id.tv_search_menu_user:
+                        mMenuTypeIndex = 1;
+                        mWindow.dismiss();
+                        search();
+                        break;
+                }
+            } else if (group == mGroup2) {
+                switch (checkedId) {
+                    case R.id.tv_search_menu_best_match:
+                        mMenuSortIndex = 0;
+                        mWindow.dismiss();
+                        search();
+                        break;
+                    case R.id.tv_search_menu_most_stars:
+                        mMenuSortIndex = 1;
+                        mWindow.dismiss();
+                        search();
+                        break;
+                    case R.id.tv_search_menu_most_forks:
+                        mMenuSortIndex = 2;
+                        mWindow.dismiss();
+                        search();
+                        break;
+                    case R.id.tv_search_menu_recently:
+                        mMenuSortIndex = 3;
+                        mWindow.dismiss();
+                        search();
+                        break;
+                }
+            }
         }
     }
 }

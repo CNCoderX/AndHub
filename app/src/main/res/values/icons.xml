@@ -7,7 +7,7 @@
     <string name="ic_star_fill">&#xe6ea;</string>
     <string name="ic_gist">&#xe6de;</string>
     <string name="ic_about">&#xe6fa;</string>
-    <string name="ic_setting">&#xe68a;</string>
+    <string name="ic_setting">&#xe728;</string>
     <string name="ic_exit">&#xe7cb;</string>
     <string name="ic_menu">&#xe714;</string>
     <string name="ic_search">&#xe741;</string>
@@ -24,4 +24,10 @@
     <string name="ic_git">&#xe628;</string>
     <string name="ic_back">&#xe720;</string>
     <string name="ic_enter">&#xe6f8;</string>
+    <string name="ic_notice">&#xe71f;</string>
+    <string name="ic_loc">&#xe6ec;</string>
+    <string name="ic_link">&#xe63e;</string>
+    <string name="ic_email">&#xe636;</string>
+    <string name="ic_delete_fill">&#xe6f2;</string>
+    <string name="ic_unfold">&#xe749;</string>
 </resources>

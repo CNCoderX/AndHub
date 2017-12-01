@@ -1,7 +1,6 @@
 package com.cncoderx.github.ui.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -99,8 +98,9 @@ public class GistActivity extends RecyclerViewActivity implements View.OnClickLi
     @Override
     public void onItemClick(RecyclerView recyclerView, View view, int position, long id) {
         Map.Entry<String, Gist.File> file = mAdapter.get(position);
-        Intent intent = new Intent(this, CodeContentActivity.class);
-        intent.setData(Uri.parse(file.getValue().url));
+        Intent intent = new Intent(this, TextFileReviewActivity.class);
+        intent.putExtra(IntentExtra.KEY_NAME, file.getKey());
+        intent.putExtra(IntentExtra.KEY_PATH, file.getValue().url);
         startActivity(intent);
     }
 

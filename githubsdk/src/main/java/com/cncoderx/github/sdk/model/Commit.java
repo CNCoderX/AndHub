@@ -3,6 +3,7 @@ package com.cncoderx.github.sdk.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.cncoderx.github.sdk.parcel.DateParcel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -57,7 +58,7 @@ public class Commit implements Parcelable {
         protected Contact(Parcel in) {
             name = in.readString();
             email = in.readString();
-            date = DateParcel.readDate(in);
+            date = DateParcel.read(in);
         }
 
         public static final Creator<Contact> CREATOR = new Creator<Contact>() {
@@ -81,7 +82,7 @@ public class Commit implements Parcelable {
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(name);
             dest.writeString(email);
-            DateParcel.writeDate(date, dest);
+            DateParcel.write(date, dest);
         }
     }
 }

@@ -18,35 +18,35 @@ public class BasePreference {
         mSharedPreferences = context.getApplicationContext().getSharedPreferences(name, mode);
     }
 
-    protected SharedPreferences.Editor putString(String key, String value) {
+    public SharedPreferences.Editor putString(String key, String value) {
         return getEditor().putString(key, value);
     }
 
-    protected SharedPreferences.Editor putStringSet(String key, Set<String> values) {
+    public SharedPreferences.Editor putStringSet(String key, Set<String> values) {
         return getEditor().putStringSet(key, values);
     }
 
-    protected SharedPreferences.Editor putInt(String key, int value) {
+    public SharedPreferences.Editor putInt(String key, int value) {
         return getEditor().putInt(key, value);
     }
 
-    protected SharedPreferences.Editor putLong(String key, long value) {
+    public SharedPreferences.Editor putLong(String key, long value) {
         return getEditor().putLong(key, value);
     }
 
-    protected SharedPreferences.Editor putFloat(String key, float value) {
+    public SharedPreferences.Editor putFloat(String key, float value) {
         return getEditor().putFloat(key, value);
     }
 
-    protected SharedPreferences.Editor putBoolean(String key, boolean value) {
+    public SharedPreferences.Editor putBoolean(String key, boolean value) {
         return getEditor().putBoolean(key, value);
     }
 
-    protected SharedPreferences.Editor remove(String key) {
+    public SharedPreferences.Editor remove(String key) {
         return getEditor().remove(key);
     }
 
-    protected SharedPreferences.Editor clear() {
+    public SharedPreferences.Editor clear() {
         return getEditor().clear();
     }
 
@@ -56,35 +56,35 @@ public class BasePreference {
         return mEditor;
     }
 
-    protected Map<String, ?> getAll() {
+    public Map<String, ?> getAll() {
         return mSharedPreferences.getAll();
     }
 
-    protected String getString(String key) {
+    public String getString(String key) {
         return mSharedPreferences.getString(key, "");
     }
 
-    protected Set<String> getStringSet(String key) {
+    public Set<String> getStringSet(String key) {
         return mSharedPreferences.getStringSet(key, null);
     }
 
-    protected int getInt(String key) {
+    public int getInt(String key) {
         return mSharedPreferences.getInt(key, 0);
     }
 
-    protected long getLong(String key) {
+    public long getLong(String key) {
         return mSharedPreferences.getLong(key, 0L);
     }
 
-    protected float getFloat(String key) {
+    public float getFloat(String key) {
         return mSharedPreferences.getFloat(key, 0f);
     }
 
-    protected boolean getBoolean(String key) {
+    public boolean getBoolean(String key) {
         return mSharedPreferences.getBoolean(key, false);
     }
 
-    protected boolean contains(String key) {
+    public boolean contains(String key) {
         return mSharedPreferences.contains(key);
     }
 

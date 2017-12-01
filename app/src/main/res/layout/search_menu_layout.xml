@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/theme_black"
+    app:divider="@drawable/list_divider_dark"
+    app:dividerPadding="10dp"
+    app:showDividers="middle">
+
+    <RadioGroup
+        android:id="@+id/rg_search_menu_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <RadioButton
+            android:id="@+id/tv_search_menu_repo"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/menu_item_height"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/repositories"
+            android:textSize="14sp"
+            android:textColor="@color/check_text_light"
+            android:button="@null"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/tv_search_menu_user"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/menu_item_height"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/users"
+            android:textSize="14sp"
+            android:textColor="@color/check_text_light"
+            android:button="@null"/>
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rg_search_menu_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <RadioButton
+            android:id="@+id/tv_search_menu_best_match"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/menu_item_height"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/best_match"
+            android:textSize="14sp"
+            android:textColor="@color/check_text_light"
+            android:button="@null"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/tv_search_menu_most_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/menu_item_height"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/most_stars"
+            android:textSize="14sp"
+            android:textColor="@color/check_text_light"
+            android:button="@null"/>
+
+        <RadioButton
+            android:id="@+id/tv_search_menu_most_forks"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/menu_item_height"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/most_forks"
+            android:textSize="14sp"
+            android:textColor="@color/check_text_light"
+            android:button="@null"/>
+
+        <RadioButton
+            android:id="@+id/tv_search_menu_recently"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/menu_item_height"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/recently"
+            android:textSize="14sp"
+            android:textColor="@color/check_text_light"
+            android:button="@null"/>
+    </RadioGroup>
+</android.support.v7.widget.LinearLayoutCompat>

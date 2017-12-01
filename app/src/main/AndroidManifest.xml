@@ -44,10 +44,10 @@
                   android:windowSoftInputMode="stateHidden|stateUnchanged"
                   android:label="@string/search">
         </activity>
-        <activity android:name=".ui.activity.RepoDetailActivity"
+        <activity android:name=".ui.activity.RepositoryActivity"
                   android:label="@string/repositories">
         </activity>
-        <activity android:name=".ui.activity.CodeContentActivity"
+        <activity android:name=".ui.activity.TextFileReviewActivity"
                   android:label="">
         </activity>
         <activity android:name=".ui.activity.IssueCommentActivity"
@@ -57,18 +57,16 @@
                   android:label="@string/pull_requests">
         </activity>
         <activity android:name=".ui.activity.ProfileActivity"
-                  android:label=""
-                  android:launchMode="singleTask">
+                  android:label="">
         </activity>
         <activity android:name=".ui.activity.OrganizationActivity"
-                  android:label=""
-                  android:launchMode="singleTask">
+                  android:label="">
         </activity>
         <activity android:name=".ui.activity.FollowerListActivity"
-                  android:label="@string/followers">
+                  android:label="@string/followers2">
         </activity>
         <activity android:name=".ui.activity.FollowingListActivity"
-                  android:label="@string/following">
+                  android:label="@string/following2">
         </activity>
         <activity android:name=".ui.activity.GistActivity"
                   android:label="@string/gists">
@@ -78,6 +76,24 @@
         </activity>
         <activity android:name=".ui.activity.SettingActivity"
                   android:label="@string/settings">
+        </activity>
+        <activity android:name=".ui.activity.RepoListActivity"
+                  android:label="@string/repositories">
+        </activity>
+        <activity android:name=".ui.activity.GistListActivity"
+                  android:label="@string/gists">
+        </activity>
+        <activity android:name=".ui.activity.OrganListActivity"
+                  android:label="@string/organizations">
+        </activity>
+        <activity android:name=".ui.activity.MemberListActivity"
+                  android:label="@string/members">
+        </activity>
+        <activity android:name=".ui.activity.AccountListActivity"
+                  android:label="@string/accounts">
+        </activity>
+        <activity android:name=".ui.activity.AboutActivity"
+                  android:label="@string/about">
         </activity>
 
         <service android:name=".service.AccountAuthenticatorService"

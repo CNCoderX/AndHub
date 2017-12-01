@@ -3,10 +3,14 @@ package com.cncoderx.github.ui.activity;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.cncoderx.github.R;
 import com.cncoderx.recyclerviewhelper.RecyclerViewHelper;
@@ -23,10 +27,13 @@ public class RecyclerViewActivity extends Activity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    @BindView(android.R.id.empty)
+    View mEmpty;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view);
+        setContentView(getContentLayout());
         ButterKnife.bind(this);
         mRecyclerView.setLayoutManager(getLayoutManager());
         RecyclerView.ItemDecoration itemDecoration = getDefaultItemDecoration();
@@ -56,5 +63,19 @@ public class RecyclerViewActivity extends Activity {
 
     public RecyclerView getRecyclerView() {
         return mRecyclerView;
+    }
+
+    @LayoutRes
+    protected int getContentLayout() {
+        return R.layout.activity_recycler_view;
+    }
+
+    public View getEmptyView() {
+        return mEmpty;
+    }
+
+    public void setEmptyText(CharSequence text) {
+        TextView textView = (TextView) ((ViewGroup) mEmpty).getChildAt(0);
+        textView.setText(text);
     }
 }
