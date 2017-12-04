@@ -27,7 +27,7 @@ public class RepoCodePathFragment extends RecyclerViewFragment implements OnItem
             super.onBindViewHolder(holder, string, position);
             if (position == size() - 1) {
                 holder.getView(android.R.id.text1, TextView.class).setTextColor(
-                        getResources().getColor(R.color.theme_blue));
+                        getResources().getColor(R.color.theme_green));
             } else {
                 holder.getView(android.R.id.text1, TextView.class).setTextColor(
                         getResources().getColor(R.color.white));

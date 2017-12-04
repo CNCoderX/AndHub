@@ -110,7 +110,7 @@
     <string name="creating_authorization">Creating authorization</string>
     <string name="requesting_profile">Requesting account profile</string>
     <string name="logging_in">Logging in</string>
-    <string name="code_themes">Code themes</string>
+    <string name="code_style">Code style</string>
     <string name="clear_cache">Clear cache</string>
     <string name="accounts">Accounts</string>
     <string name="theme_default">Default</string>
@@ -123,4 +123,11 @@
     <string name="latest_version_toast">This is the latest version</string>
     <string name="enable_wrapping">Enable wrapping</string>
     <string name="disable_wrapping">Disable wrapping</string>
+    <string name="theme">Theme</string>
+    <string name="line_wrapping">Line wrapping</string>
+    <string name="line_numbers">Line numbers</string>
+    <string name="font_size">Font size</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
 </resources>

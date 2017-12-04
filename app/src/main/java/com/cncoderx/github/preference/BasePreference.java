@@ -61,27 +61,51 @@ public class BasePreference {
     }
 
     public String getString(String key) {
-        return mSharedPreferences.getString(key, "");
+        return getString(key, "");
+    }
+
+    public String getString(String key, String defStr) {
+        return mSharedPreferences.getString(key, defStr);
     }
 
     public Set<String> getStringSet(String key) {
-        return mSharedPreferences.getStringSet(key, null);
+        return getStringSet(key, null);
+    }
+
+    public Set<String> getStringSet(String key, Set<String> defSet) {
+        return mSharedPreferences.getStringSet(key, defSet);
     }
 
     public int getInt(String key) {
-        return mSharedPreferences.getInt(key, 0);
+        return getInt(key, 0);
+    }
+
+    public int getInt(String key, int defInt) {
+        return mSharedPreferences.getInt(key, defInt);
     }
 
     public long getLong(String key) {
-        return mSharedPreferences.getLong(key, 0L);
+        return getLong(key, 0L);
+    }
+
+    public long getLong(String key, long defLong) {
+        return mSharedPreferences.getLong(key, defLong);
     }
 
     public float getFloat(String key) {
-        return mSharedPreferences.getFloat(key, 0f);
+        return getFloat(key, 0f);
+    }
+
+    public float getFloat(String key, float defFloat) {
+        return mSharedPreferences.getFloat(key, defFloat);
     }
 
     public boolean getBoolean(String key) {
-        return mSharedPreferences.getBoolean(key, false);
+        return getBoolean(key, false);
+    }
+
+    public boolean getBoolean(String key, boolean defBool) {
+        return mSharedPreferences.getBoolean(key, defBool);
     }
 
     public boolean contains(String key) {

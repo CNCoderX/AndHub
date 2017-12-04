@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:divider="@drawable/list_divider"
+    app:showDividers="middle|end">
+
+    <com.cncoderx.github.ui.view.AppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_height"/>
+
+    <LinearLayout
+        android:id="@+id/ll_code_style_setting_theme"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_item_height"
+        android:gravity="center_vertical"
+        android:background="@drawable/white_item_selector"
+        android:paddingLeft="@dimen/box_horizontal_padding"
+        android:paddingRight="@dimen/box_horizontal_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/theme"
+            android:textSize="16sp"
+            android:textColor="@color/text_black"/>
+
+        <TextView
+            android:id="@+id/tv_code_style_setting_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/gray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_code_style_setting_font"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_item_height"
+        android:gravity="center_vertical"
+        android:background="@drawable/white_item_selector"
+        android:paddingLeft="@dimen/box_horizontal_padding"
+        android:paddingRight="@dimen/box_horizontal_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/font_size"
+            android:textSize="16sp"
+            android:textColor="@color/text_black"/>
+
+        <TextView
+            android:id="@+id/tv_code_style_setting_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/gray"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_height"/>
+
+    <LinearLayout
+        android:id="@+id/ll_code_style_setting_wrapping"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_item_height"
+        android:gravity="center_vertical"
+        android:background="@drawable/white_item_selector"
+        android:paddingLeft="@dimen/box_horizontal_padding"
+        android:paddingRight="@dimen/box_horizontal_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/line_wrapping"
+            android:textSize="16sp"
+            android:textColor="@color/text_black"/>
+
+        <Switch
+            android:id="@+id/swt_code_style_setting_wrapping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_code_style_setting_numbers"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_item_height"
+        android:gravity="center_vertical"
+        android:background="@drawable/white_item_selector"
+        android:paddingLeft="@dimen/box_horizontal_padding"
+        android:paddingRight="@dimen/box_horizontal_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/line_numbers"
+            android:textSize="16sp"
+            android:textColor="@color/text_black"/>
+
+        <Switch
+            android:id="@+id/swt_code_style_setting_numbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

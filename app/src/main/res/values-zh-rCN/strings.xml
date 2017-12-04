@@ -84,7 +84,7 @@
     <string name="creating_authorization">正在创建授权</string>
     <string name="requesting_profile">正在请求账户资料</string>
     <string name="logging_in">登录中</string>
-    <string name="code_themes">代码主题</string>
+    <string name="code_style">代码样式</string>
     <string name="clear_cache">清理缓存</string>
     <string name="accounts">账号</string>
     <string name="clear_cache_finished">清理缓存完毕</string>
@@ -92,4 +92,11 @@
     <string name="latest_version_toast">当前已是最新版本</string>
     <string name="enable_wrapping">启用自动折行</string>
     <string name="disable_wrapping">禁用自动折行</string>
+    <string name="theme">主题</string>
+    <string name="line_wrapping">自动换行</string>
+    <string name="line_numbers">显示行号</string>
+    <string name="font_size">字体大小</string>
+    <string name="small">小</string>
+    <string name="medium">中</string>
+    <string name="large">大</string>
 </resources>

@@ -1,43 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="search_sort_options">
-        <item>@string/best_match</item>
-        <item>@string/most_stars</item>
-        <item>@string/fewest_stars</item>
-        <item>@string/most_forks</item>
-        <item>@string/fewest_forks</item>
-        <item>@string/recently</item>
-        <item>@string/least_recently_updated</item>
-    </string-array>
-
-    <string-array name="search_lang_options">
-        <item>Any Language</item>
-        <item>C</item>
-        <item>C#</item>
-        <item>C++</item>
-        <item>Clojure</item>
-        <item>CoffeeScript</item>
-        <item>CSS</item>
-        <item>Go</item>
-        <item>Haskell</item>
-        <item>HTML</item>
-        <item>Java</item>
-        <item>JavaScript</item>
-        <item>Lua</item>
-        <item>Matlab</item>
-        <item>Objective-C</item>
-        <item>Perl</item>
-        <item>PHP</item>
-        <item>Python</item>
-        <item>R</item>
-        <item>Ruby</item>
-        <item>Scala</item>
-        <item>Shell</item>
-        <item>Swift</item>
-        <item>TeX</item>
-        <item>Vim script</item>
-        <item>Other Language</item>
-    </string-array>
 
     <string-array name="languages">
         <item>@string/default_lang</item>
@@ -45,12 +7,63 @@
         <item>简体中文</item>
         <item>繁體中文</item>
     </string-array>
-
+    
     <string-array name="code_themes">
-        <item>@string/theme_default</item>
-        <item>@string/theme_desert</item>
-        <item>@string/theme_doxy</item>
-        <item>@string/theme_sons_of_obsidian</item>
-        <item>@string/theme_sunburst</item>
+        <item>default</item>
+        <item>3024-day</item>
+        <item>3024-night</item>
+        <item>abcdef</item>
+        <item>ambiance</item>
+        <item>base16-dark</item>
+        <item>base16-light</item>
+        <item>bespin</item>
+        <item>blackboard</item>
+        <item>cobalt</item>
+        <item>colorforth</item>
+        <item>dracula</item>
+        <item>duotone-dark</item>
+        <item>duotone-light</item>
+        <item>eclipse</item>
+        <item>elegant</item>
+        <item>erlang-dark</item>
+        <item>hopscotch</item>
+        <item>icecoder</item>
+        <item>isotope</item>
+        <item>lesser-dark</item>
+        <item>liquibyte</item>
+        <item>material</item>
+        <item>mbo</item>
+        <item>mdn-like</item>
+        <item>midnight</item>
+        <item>monokai</item>
+        <item>neat</item>
+        <item>neo</item>
+        <item>night</item>
+        <item>panda-syntax</item>
+        <item>paraiso-dark</item>
+        <item>paraiso-light</item>
+        <item>pastel-on-dark</item>
+        <item>railscasts</item>
+        <item>rubyblue</item>
+        <item>seti</item>
+        <item>solarized dark</item>
+        <item>solarized light</item>
+        <item>the-matrix</item>
+        <item>tomorrow-night-bright</item>
+        <item>tomorrow-night-eighties</item>
+        <item>ttcn</item>
+        <item>twilight</item>
+        <item>vibrant-ink</item>
+        <item>xq-dark</item>
+        <item>xq-light</item>
+        <item>yeti</item>
+        <item>zenburn</item>
     </string-array>
+
+    <string-array name="code_font_sizes">
+        <item>@string/small</item>
+        <item>@string/medium</item>
+        <item>@string/large</item>
+    </string-array>
+
 </resources>

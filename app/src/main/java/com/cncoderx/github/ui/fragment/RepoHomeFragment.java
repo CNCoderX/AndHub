@@ -102,8 +102,7 @@ public class RepoHomeFragment extends Fragment {
     private static final String PAGE_START = "<!DOCTYPE html><html lang=\"en\"> <head> <title></title>" +
             "<meta charset=\"UTF-8\"> " +
             "<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\"/>" +
-            "<script src=\"intercept.js\"></script>" +
-            "<link href=\"github.css\" rel=\"stylesheet\"> </head> <body>";
+            "<link href=\"markdown.css\" rel=\"stylesheet\"> </head> <body>";
 
     private static final String PAGE_END = "</body></html>";
 
@@ -115,7 +114,7 @@ public class RepoHomeFragment extends Fragment {
             public void onSuccess(ResponseBody body) {
                 try {
                     String html = PAGE_START + body.string() + PAGE_END;
-                    wvReadme.loadDataWithBaseURL("file:///android_asset/readme/",
+                    wvReadme.loadDataWithBaseURL("file:///android_asset/",
                             html, "text/html", "utf-8", null);
                 } catch (IOException e) {
                     e.printStackTrace();

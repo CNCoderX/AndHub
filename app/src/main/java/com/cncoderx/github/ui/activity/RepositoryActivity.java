@@ -9,7 +9,10 @@ import com.cncoderx.github.ui.fragment.RepoCodeFragment;
 import com.cncoderx.github.ui.fragment.RepoHomeFragment;
 import com.cncoderx.github.ui.fragment.RepoIssuesFragment;
 import com.cncoderx.github.ui.fragment.RepoPullsFragment;
+import com.cncoderx.github.ui.view.AppBar;
 import com.cncoderx.github.utils.IntentExtra;
+
+import butterknife.BindView;
 
 public class RepositoryActivity extends TabPagerActivity {
     static final int TAB_COUNT = 4;
@@ -20,11 +23,15 @@ public class RepositoryActivity extends TabPagerActivity {
 
     private String mOwner, mRepo;
 
+    @BindView(R.id.app_bar)
+    AppBar mAppBar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mOwner = getIntent().getStringExtra(IntentExtra.KEY_OWNER);
         mRepo = getIntent().getStringExtra(IntentExtra.KEY_REPO);
+        mAppBar.setTitle(mOwner + "/" + mRepo);
     }
 
     @Override

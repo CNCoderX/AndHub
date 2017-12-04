@@ -47,7 +47,7 @@
         <activity android:name=".ui.activity.RepositoryActivity"
                   android:label="@string/repositories">
         </activity>
-        <activity android:name=".ui.activity.TextFileReviewActivity"
+        <activity android:name=".ui.activity.CodeReviewActivity"
                   android:label="">
         </activity>
         <activity android:name=".ui.activity.IssueCommentActivity"
@@ -76,6 +76,9 @@
         </activity>
         <activity android:name=".ui.activity.SettingActivity"
                   android:label="@string/settings">
+        </activity>
+        <activity android:name=".ui.activity.CodeStyleSettingActivity"
+                  android:label="@string/code_style">
         </activity>
         <activity android:name=".ui.activity.RepoListActivity"
                   android:label="@string/repositories">

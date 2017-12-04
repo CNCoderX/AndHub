@@ -12,7 +12,7 @@ import com.cncoderx.github.R;
 import com.cncoderx.github.sdk.ServiceGenerator;
 import com.cncoderx.github.sdk.model.Contents;
 import com.cncoderx.github.sdk.service.IContentsService;
-import com.cncoderx.github.ui.activity.TextFileReviewActivity;
+import com.cncoderx.github.ui.activity.CodeReviewActivity;
 import com.cncoderx.github.ui.adapter.FileListAdapter;
 import com.cncoderx.github.utils.IntentExtra;
 import com.cncoderx.github.utils.ListCallback;
@@ -70,7 +70,7 @@ public class RepoCodeListFragment extends RecyclerViewFragment implements OnItem
             } else {
                 String url = contents.downloadUrl;
                 if (!TextUtils.isEmpty(url)) {
-                    Intent intent = new Intent(getActivity(), TextFileReviewActivity.class);
+                    Intent intent = new Intent(getActivity(), CodeReviewActivity.class);
                     intent.putExtra(IntentExtra.KEY_NAME, contents.name);
                     intent.putExtra(IntentExtra.KEY_PATH, url);
                     startActivity(intent);

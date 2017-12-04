@@ -104,7 +104,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_setting_code_themes"
+        android:id="@+id/ll_setting_code_style"
         android:layout_width="match_parent"
         android:layout_height="@dimen/single_item_height"
         android:gravity="center_vertical"
@@ -116,15 +116,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/code_themes"
+            android:text="@string/code_style"
             android:textSize="16sp"
             android:textColor="@color/text_black"/>
 
-        <TextView
-            android:id="@+id/tv_setting_code_themes"
+        <com.cncoderx.github.ui.view.IconView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:text="@string/ic_enter"
+            android:textSize="18sp"
             android:textColor="@color/gray"/>
     </LinearLayout>
 

@@ -18,6 +18,6 @@
         app:centerColor="#3effffff"
         app:endColor="#ffffffff"
         app:gradientWidth="200dp"
-        app:duration="5000"/>
+        app:duration="3000"/>
 
 </RelativeLayout>

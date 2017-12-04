@@ -98,7 +98,7 @@ public class GistActivity extends RecyclerViewActivity implements View.OnClickLi
     @Override
     public void onItemClick(RecyclerView recyclerView, View view, int position, long id) {
         Map.Entry<String, Gist.File> file = mAdapter.get(position);
-        Intent intent = new Intent(this, TextFileReviewActivity.class);
+        Intent intent = new Intent(this, CodeReviewActivity.class);
         intent.putExtra(IntentExtra.KEY_NAME, file.getKey());
         intent.putExtra(IntentExtra.KEY_PATH, file.getValue().url);
         startActivity(intent);

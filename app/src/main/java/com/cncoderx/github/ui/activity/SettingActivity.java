@@ -18,7 +18,6 @@ import com.cncoderx.github.R;
 import com.cncoderx.github.preference.ProfilePreference;
 import com.cncoderx.github.preference.SettingPreference;
 import com.cncoderx.github.sdk.TokenStore;
-import com.cncoderx.github.ui.dialog.CodeThemeSettingDialog;
 import com.cncoderx.github.ui.dialog.LanguageSettingDialog;
 import com.cncoderx.github.ui.dialog.MessageBaseDialog;
 import com.cncoderx.github.utils.ToolUtils;
@@ -37,9 +36,6 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.tv_setting_language)
     TextView tvLanguage;
 
-    @BindView(R.id.tv_setting_code_themes)
-    TextView tvCodeThemes;
-
     @BindView(R.id.tv_setting_version)
     TextView tvVersion;
 
@@ -47,7 +43,6 @@ public class SettingActivity extends BaseActivity {
     TextView tvCache;
 
     private LanguageSettingDialog mLanguageSettingDialog;
-    private CodeThemeSettingDialog mCodeThemeSettingDialog;
     private MessageBaseDialog mClearCacheDialog;
     private MessageBaseDialog mLogoutDialog;
 
@@ -62,15 +57,6 @@ public class SettingActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 restartApplication();
-            }
-        });
-        mCodeThemeSettingDialog = new CodeThemeSettingDialog();
-        mCodeThemeSettingDialog.setOnClickListener(new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                String[] themes = getResources().getStringArray(R.array.code_themes);
-                tvCodeThemes.setText(themes[which]);
             }
         });
         mClearCacheDialog = MessageBaseDialog.newInstance(getString(R.string.clear_cache_confirm_again),
@@ -102,12 +88,9 @@ public class SettingActivity extends BaseActivity {
     private void init() {
         SettingPreference preference = new SettingPreference(this);
         int lang = preference.getLanguage();
-        int theme = preference.getCodeThemes();
         Resources resources = getResources();
         String language = resources.getStringArray(R.array.languages)[lang];
-        String codeTheme = resources.getStringArray(R.array.code_themes)[theme];
         tvLanguage.setText(language);
-        tvCodeThemes.setText(codeTheme);
         tvVersion.setText(BuildConfig.VERSION_NAME);
     }
 
@@ -122,9 +105,10 @@ public class SettingActivity extends BaseActivity {
         mLanguageSettingDialog.show(getSupportFragmentManager(), getString(R.string.language));
     }
 
-    @OnClick(R.id.ll_setting_code_themes)
-    public void onCodeThemesClick(View v) {
-        mCodeThemeSettingDialog.show(getSupportFragmentManager(), getString(R.string.code_themes));
+    @OnClick(R.id.ll_setting_code_style)
+    public void onCodeStyleClick(View v) {
+        Intent intent = new Intent(this, CodeStyleSettingActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.ll_setting_clear_cache)

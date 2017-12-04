@@ -14,7 +14,6 @@ import com.cncoderx.github.sdk.HttpConfig;
 import com.cncoderx.github.sdk.ServiceGenerator;
 import com.cncoderx.github.sdk.TokenStore;
 import com.cncoderx.github.utils.Constants;
-import com.cncoderx.github.utils.Typefaces;
 
 import java.util.Locale;
 
@@ -43,8 +42,6 @@ public class AppContext extends Application {
         config.setConnectTimeout(Constants.DEFAULT_CONNECT_TIMEOUT);
         config.setReadTimeout(Constants.DEFAULT_READ_TIMEOUT);
         ServiceGenerator.initialize(this, config);
-
-        Typefaces.replaceSystemDefaultFont(this, "Arial.ttf");
 
         Locale locale = new SettingPreference(this).getLocale();
         setLocale(locale);
