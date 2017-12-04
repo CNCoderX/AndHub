@@ -22,18 +22,10 @@ android {
             minifyEnabled false
         }
     }
-//    productFlavors {
-//        armv7 {
-//            ndk {
-//                abiFilters "armeabi-v7a"
-//            }
-//        }
-//        x86 {
-//            ndk {
-//                abiFilters "x86"
-//            }
-//        }
-//    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -41,19 +33,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.android.support:appcompat-v7:25.3.1'
-    //    compile 'com.android.support:design:25.3.1'
 
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
     compile 'com.github.bumptech.glide:glide:4.3.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
+
     compile 'com.cncoderx.recyclerviewhelper:library:1.2.0'
-    //    compile('org.xwalk:xwalk_core_library:22.52.561.4') {
-    //        exclude group: 'com.android.support', module: 'support-v4'
-    //        exclude group: 'com.google.code.findbugs', module: 'jsr305'
-    //        exclude module: 'jsr305:2.0.1'
-    //    }
-//    compile project(':githubsdk')
+
     releaseCompile project(path: ':githubsdk', configuration: 'release')
     debugCompile project(path: ':githubsdk', configuration: 'debug')
 }
