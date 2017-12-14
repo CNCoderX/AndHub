@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
+
+        <variable name="avatarUrl" type="String"/>
+        <variable name="username" type="String"/>
+        <variable name="password" type="String"/>
+        <variable name="progress" type="String"/>
+    </data>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <com.cncoderx.andhub.ui.view.AppBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.cncoderx.andhub.ui.view.IconView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_search"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:onClick="onSearch"/>
+
+        </com.cncoderx.andhub.ui.view.AppBar>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/identicon"
+            imageUrl="@{avatarUrl}"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/box_horizontal_padding"
+            android:layout_marginRight="@dimen/box_horizontal_padding">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white">
+
+                <EditText
+                    android:id="@+id/et_login_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:hint="@string/login_username_hint"
+                    android:textColorHint="@color/text_hint"
+                    android:textColor="#3C3C3C"
+                    android:textSize="16sp"
+                    android:text="@={username}"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions"
+                    android:background="@null"
+                    app:selection="@{username.length()}"/>
+
+                <com.cncoderx.andhub.ui.view.IconView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="@string/ic_unfold"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_black"
+                    android:onClick="onUnfold"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:hint="@string/login_password_hint"
+                    android:textColorHint="@color/text_hint"
+                    android:textColor="#3C3C3C"
+                    android:textSize="16sp"
+                    android:text="@={password}"
+                    android:singleLine="true"
+                    android:inputType="textPassword"
+                    android:background="@null"
+                    app:selection="@{password.length()}"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:text="@string/login"
+                    android:background="@drawable/theme_button_bg"
+                    android:onClick="onLogin"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:visibility="@{TextUtils.isEmpty(progress) ? View.GONE : View.VISIBLE}">
+
+                    <com.cncoderx.andhub.ui.view.AnimatedImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/loading"
+                        android:background="@mipmap/loading_bg"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:maxLines="1"
+                        android:text="@{progress}"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray"/>
+
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

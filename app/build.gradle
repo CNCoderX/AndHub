@@ -1,47 +1,49 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
-
     defaultConfig {
-        applicationId "com.cncoderx.github"
+        applicationId "com.cncoderx.andhub"
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {
-            minifyEnabled false
-        }
     }
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
+    dataBinding {
+        enabled = true
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
     testCompile 'junit:junit:4.12'
-
     compile 'com.android.support:appcompat-v7:25.3.1'
 
-    compile 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+//    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+//    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
+//    compile 'io.reactivex:rxandroid:1.2.0'
+
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
+
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.0-RC1'
 
     compile 'com.github.bumptech.glide:glide:4.3.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
 
     compile 'com.cncoderx.recyclerviewhelper:library:1.2.0'
-
-    releaseCompile project(path: ':githubsdk', configuration: 'release')
-    debugCompile project(path: ':githubsdk', configuration: 'debug')
 }

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.cncoderx.andhub.utils.NumberFormatter"/>
+        <import type="com.cncoderx.andhub.preference.ProfilePreference"/>
+
+        <variable name="title" type="String"/>
+        <variable name="profile" type="ProfilePreference"/>
+    </data>
+
+    <android.support.v4.widget.SlidingPaneLayout
+        android:id="@+id/sliding_pane"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/theme_black">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onProfile"
+                    style="@style/box_padding">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/identicon"
+                        imageUrl="@{profile.getAvatar()}"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:text="@{profile.getLogin()}"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            android:textColorHint="@color/gray"
+                            android:hint="@string/no_name"
+                            android:text="@{profile.getName()}"/>
+                    </LinearLayout>
+
+                    <com.cncoderx.andhub.ui.view.IconView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/ic_enter"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/box_padding">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:onClick="onFollowers">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@{NumberFormatter.format(profile.getFollowers())}"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/followers"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#30000000"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:onClick="onFollowing">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@{NumberFormatter.format(profile.getFollowing())}"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/following"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/ll_main_menu_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/white_item_selector"
+                    android:onClick="onNews"
+                    style="@style/box_padding">
+
+                    <com.cncoderx.andhub.ui.view.IconView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ic_news"
+                        android:textSize="26sp"
+                        android:textColor="@color/text_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/box_horizontal_padding"
+                        android:textColor="@color/text_black"
+                        android:textSize="16sp"
+                        android:text="@string/news"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_main_menu_repos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/white_item_selector"
+                    android:onClick="onRepos"
+                    style="@style/box_padding">
+
+                    <com.cncoderx.andhub.ui.view.IconView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ic_repo"
+                        android:textSize="26sp"
+                        android:textColor="@color/text_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/box_horizontal_padding"
+                        android:textColor="@color/text_black"
+                        android:textSize="16sp"
+                        android:text="@string/repositories"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="@drawable/list_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_main_menu_organs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/white_item_selector"
+                    android:onClick="onOrgans"
+                    style="@style/box_padding">
+
+                    <com.cncoderx.andhub.ui.view.IconView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ic_group"
+                        android:textSize="26sp"
+                        android:textColor="@color/text_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/box_horizontal_padding"
+                        android:textColor="@color/text_black"
+                        android:textSize="16sp"
+                        android:text="@string/organizations"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_main_menu_stars"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/white_item_selector"
+                    android:onClick="onStars"
+                    style="@style/box_padding">
+
+                    <com.cncoderx.andhub.ui.view.IconView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ic_star"
+                        android:textSize="26sp"
+                        android:textColor="@color/text_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/box_horizontal_padding"
+                        android:textColor="@color/text_black"
+                        android:textSize="16sp"
+                        android:text="@string/stars"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_main_menu_gists"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/white_item_selector"
+                    android:onClick="onGists"
+                    style="@style/box_padding">
+
+                    <com.cncoderx.andhub.ui.view.IconView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ic_gist"
+                        android:textSize="26sp"
+                        android:textColor="@color/text_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/box_horizontal_padding"
+                        android:textColor="@color/text_black"
+                        android:textSize="16sp"
+                        android:text="@string/gists"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="@drawable/list_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_main_menu_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/white_item_selector"
+                    android:onClick="onSettings"
+                    style="@style/box_padding">
+
+                    <com.cncoderx.andhub.ui.view.IconView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ic_setting"
+                        android:textSize="26sp"
+                        android:textColor="@color/text_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/box_horizontal_padding"
+                        android:textColor="@color/text_black"
+                        android:textSize="16sp"
+                        android:text="@string/settings"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="@drawable/list_divider"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar_height"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/theme_black">
+
+                <com.cncoderx.andhub.ui.view.IconView
+                    android:id="@+id/iv_main_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_menu"
+                    android:textSize="28sp"
+                    android:textColor="@color/white"
+                    android:onClick="onMenu"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:maxLines="1"
+                    android:text="@{title}"/>
+
+                <com.cncoderx.andhub.ui.view.IconView
+                    android:id="@+id/iv_main_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ic_search"
+                    android:textSize="28sp"
+                    android:textColor="@color/white"
+                    android:onClick="onSearch"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+        </LinearLayout>
+    </android.support.v4.widget.SlidingPaneLayout>
+</layout>

@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.cncoderx.github">
+          package="com.cncoderx.andhub">
 
-    <!-- <uses-sdk -->
-    <!-- android:minSdkVersion="16" -->
-    <!-- android:targetSdkVersion="19"  tools:overrideLibrary="org.xwalk.core"/> -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" android:maxSdkVersion="22"/>
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" android:maxSdkVersion="22"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"
+                     android:maxSdkVersion="22"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"
+                     android:maxSdkVersion="22"/>
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"
                      android:maxSdkVersion="22"/>
 
@@ -22,8 +19,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".ui.activity.SplashActivity">
             <intent-filter>
@@ -32,72 +29,81 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:label="@string/login"/>
+
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:label="@string/search"/>
+
         <activity
             android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask"
-            android:label="@string/app_name">
-        </activity>
-        <activity android:name=".ui.activity.LoginActivity"
-                  android:label="@string/login">
-        </activity>
-        <activity android:name=".ui.activity.SearchActivity"
-                  android:windowSoftInputMode="stateHidden|stateUnchanged"
-                  android:label="@string/search">
-        </activity>
-        <activity android:name=".ui.activity.RepositoryActivity"
-                  android:label="@string/repositories">
-        </activity>
-        <activity android:name=".ui.activity.CodeReviewActivity"
-                  android:label="">
-        </activity>
-        <activity android:name=".ui.activity.IssueCommentActivity"
-                  android:label="@string/issues">
-        </activity>
-        <activity android:name=".ui.activity.PullCommentActivity"
-                  android:label="@string/pull_requests">
-        </activity>
-        <activity android:name=".ui.activity.ProfileActivity"
-                  android:label="">
-        </activity>
-        <activity android:name=".ui.activity.OrganizationActivity"
-                  android:label="">
-        </activity>
-        <activity android:name=".ui.activity.FollowerListActivity"
-                  android:label="@string/followers2">
-        </activity>
-        <activity android:name=".ui.activity.FollowingListActivity"
-                  android:label="@string/following2">
-        </activity>
-        <activity android:name=".ui.activity.GistActivity"
-                  android:label="@string/gists">
-        </activity>
-        <activity android:name=".ui.activity.GistCommentActivity"
-                  android:label="@string/comments">
-        </activity>
-        <activity android:name=".ui.activity.SettingActivity"
-                  android:label="@string/settings">
-        </activity>
-        <activity android:name=".ui.activity.CodeStyleSettingActivity"
-                  android:label="@string/code_style">
-        </activity>
-        <activity android:name=".ui.activity.RepoListActivity"
-                  android:label="@string/repositories">
-        </activity>
-        <activity android:name=".ui.activity.GistListActivity"
-                  android:label="@string/gists">
-        </activity>
-        <activity android:name=".ui.activity.OrganListActivity"
-                  android:label="@string/organizations">
-        </activity>
-        <activity android:name=".ui.activity.MemberListActivity"
-                  android:label="@string/members">
-        </activity>
-        <activity android:name=".ui.activity.AccountListActivity"
-                  android:label="@string/accounts">
-        </activity>
-        <activity android:name=".ui.activity.AboutActivity"
-                  android:label="@string/about">
-        </activity>
+            android:label="@string/app_name"/>
+
+        <activity
+            android:name=".ui.activity.SettingActivity"
+            android:label="@string/settings"/>
+
+        <activity
+            android:name=".ui.activity.CodeStyleSettingActivity"
+            android:label="@string/code_style"/>
+
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:label="@string/about"/>
+
+        <activity android:name=".ui.activity.ProfileActivity"/>
+
+        <activity
+            android:name=".ui.activity.FollowerListActivity"
+            android:label="@string/followers2"/>
+
+        <activity
+            android:name=".ui.activity.FollowingListActivity"
+            android:label="@string/following2"/>
+
+        <activity
+            android:name=".ui.activity.RepoListActivity"
+            android:label="@string/repositories"/>
+
+        <activity
+            android:name=".ui.activity.GistListActivity"
+            android:label="@string/gists"/>
+
+        <activity
+            android:name=".ui.activity.MemberListActivity"
+            android:label="@string/members"/>
+
+        <activity
+            android:name=".ui.activity.OrganListActivity"
+            android:label="@string/organizations"/>
+
+        <activity
+            android:name=".ui.activity.RepositoryActivity"
+            android:label="@string/repositories"/>
+
+        <activity
+            android:name=".ui.activity.CodeReviewActivity"/>
+
+        <activity
+            android:name=".ui.activity.IssueCommentActivity"
+            android:label="@string/issues"/>
+
+        <activity
+            android:name=".ui.activity.PullCommentActivity"
+            android:label="@string/pull_requests"/>
+
+        <activity
+            android:name=".ui.activity.GistActivity"
+            android:label="@string/gists"/>
+
+        <activity
+            android:name=".ui.activity.GistCommentActivity"
+            android:label="@string/gists"/>
 
         <service android:name=".service.AccountAuthenticatorService"
                  android:exported="false">

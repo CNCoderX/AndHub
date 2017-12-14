@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@color/white">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:id="@+id/iv_comment_user_avatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="centerCrop"/>
+    <data>
+        <import type="com.cncoderx.andhub.model.Comment"/>
+        <variable name="comment" type="Comment"/>
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:orientation="vertical">
+        android:padding="10dp"
+        android:background="@color/white">
 
-        <TextView
-            android:id="@+id/tv_comment_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textSize="15sp"
-            android:textColor="@color/theme_blue"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            imageUrl="@{comment.user == null ? null : comment.user.avatarUrl}"/>
 
-        <TextView
-            android:id="@+id/tv_comment_body"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:textSize="14sp"
-            android:textColor="#303030"/>
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_comment_updated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:maxLines="1"
-            android:textColor="@color/gray"
-            android:textSize="12sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="15sp"
+                android:textColor="@color/theme_blue"
+                android:text="@{comment.user == null ? null : comment.user.login}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textSize="14sp"
+                android:textColor="#303030"
+                android:text="@{comment.body}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:maxLines="1"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                time="@{comment.createdAt}"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.CodeReviewActivity">
+
+    <com.cncoderx.andhub.ui.view.AppBar
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.cncoderx.andhub.ui.view.IconView
+            android:id="@+id/iv_code_review_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ic_setting"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:onClick="onMenu"/>
+    </com.cncoderx.andhub.ui.view.AppBar>
+
+    <WebView
+        android:id="@+id/wv_code_review_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

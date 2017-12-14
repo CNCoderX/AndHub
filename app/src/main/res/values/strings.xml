@@ -1,16 +1,12 @@
 <resources>
-    <string name="app_name">Github</string>
+    <string name="app_name">Andhub</string>
     <string name="login_username_hint">Username or email address</string>
     <string name="login_password_hint">Password</string>
     <string name="login">Login</string>
     <string name="search">Search</string>
-    <string name="version">v1.0.0</string>
     <string name="author">Author</string>
-    <string name="author_value">cncoderx</string>
     <string name="email">Email</string>
-    <string name="email_value">wujie59585@163.com</string>
     <string name="homepage">Homepage</string>
-    <string name="homepage_value">https://github.com/CNCoderX</string>
     <string name="no_name">No Name</string>
     <string name="following">Following</string>
     <string name="followers">Followers</string>

@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    style="@style/box_padding">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <data>
+        <import type="android.text.method.LinkMovementMethod"/>
+        <import type="com.cncoderx.andhub.model.Event"/>
 
-    <ImageView
-        android:id="@+id/iv_news_avatar"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:scaleType="centerCrop"/>
-
+        <variable name="event" type="Event"/>
+    </data>
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/box_horizontal_padding"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_news_title"
-            android:layout_width="wrap_content"
+        android:background="@color/white"
+        style="@style/box_padding">
+    
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:scaleType="centerCrop"
+            imageUrl="@{event.actor.avatarUrl}"/>
+    
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:textColor="@color/theme_black"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/tv_news_created"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:maxLines="1"
-            android:textColor="@color/gray"
-            android:textSize="12sp"/>
+            android:layout_marginLeft="@dimen/box_horizontal_padding"
+            android:orientation="vertical">
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textColorHighlight="@android:color/transparent"
+                android:textColor="@color/theme_black"
+                android:textSize="15sp"
+                eventType="@{event}"
+                app:movementMethod="@{LinkMovementMethod.getInstance()}"/>
+    
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:maxLines="1"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                time="@{event.createdAt}"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>

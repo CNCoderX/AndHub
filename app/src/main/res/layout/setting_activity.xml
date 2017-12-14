@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.cncoderx.andhub.BuildConfig"/>
+        <import type="com.cncoderx.andhub.preference.SettingPreference"/>
+
+        <variable name="setting" type="SettingPreference"/>
+        <variable name="cacheSize" type="long"/>
+    </data>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:divider="@drawable/list_divider"
+        app:showDividers="middle|end">
+
+        <com.cncoderx.andhub.ui.view.AppBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_height"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center_vertical"
+            android:background="@drawable/white_item_selector"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_horizontal_padding"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/accounts"
+                android:textSize="16sp"
+                android:textColor="@color/text_black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/gray"/>
+
+            <com.cncoderx.andhub.ui.view.IconView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center_vertical"
+            android:background="@drawable/white_item_selector"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_horizontal_padding"
+            android:onClick="onClearCache">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/clear_cache"
+                android:textSize="16sp"
+                android:textColor="@color/text_black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/gray"
+                fileSize="@{cacheSize}"/>
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_height"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center_vertical"
+            android:background="@drawable/white_item_selector"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_horizontal_padding"
+            android:onClick="onLanguage">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/language"
+                android:textSize="16sp"
+                android:textColor="@color/text_black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/gray"
+                setting="@{setting}"
+                key="@{SettingPreference.KEY_LANG}"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center_vertical"
+            android:background="@drawable/white_item_selector"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_horizontal_padding"
+            android:onClick="onCodeStyle">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/code_style"
+                android:textSize="16sp"
+                android:textColor="@color/text_black"/>
+
+            <com.cncoderx.andhub.ui.view.IconView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_height"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center_vertical"
+            android:background="@drawable/white_item_selector"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_horizontal_padding"
+            android:onClick="onAbout">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/about"
+                android:textSize="16sp"
+                android:textColor="@color/text_black"/>
+
+            <com.cncoderx.andhub.ui.view.IconView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ic_enter"
+                android:textSize="18sp"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center_vertical"
+            android:background="@drawable/white_item_selector"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_horizontal_padding"
+            android:onClick="onVersion">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/check_version"
+                android:textSize="16sp"
+                android:textColor="@color/text_black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/gray"
+                android:text="@{BuildConfig.VERSION_NAME}"/>
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_height"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_item_height"
+            android:gravity="center"
+            android:background="@drawable/white_item_selector"
+            android:paddingLeft="@dimen/box_horizontal_padding"
+            android:paddingRight="@dimen/box_horizontal_padding"
+            android:onClick="onLogout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:textSize="16sp"
+                android:textColor="#d32f2f"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+</layout>

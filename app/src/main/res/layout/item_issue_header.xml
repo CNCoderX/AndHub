@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.cncoderx.andhub.model.Issue"/>
+        <variable name="issue" type="Issue"/>
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
+
+        <include
+            layout="@layout/item_issue_list"
+            app:issue="@{issue}"/>
+    </LinearLayout>
+</layout>

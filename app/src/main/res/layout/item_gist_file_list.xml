@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="java.util.Map.Entry"/>
+        <import type="com.cncoderx.andhub.model.Gist.File"/>
+
+        <variable name="file" type="Entry&lt;String, File&gt;"/>
+    </data>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:paddingLeft="@dimen/box_horizontal_padding"
+        android:paddingRight="@dimen/box_horizontal_padding"
+        android:background="@drawable/white_item_selector">
+
+        <com.cncoderx.andhub.ui.view.IconView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ic_file"
+            android:textSize="18sp"
+            android:textColor="@color/text_black"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="14sp"
+            android:textColor="@color/text_black"
+            android:text="@{file.getKey()}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            fileSize="@{file.getValue().size}"/>
+    </LinearLayout>
+</layout>
