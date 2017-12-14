@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View"/>
         <import type="com.cncoderx.andhub.model.File"/>
 
         <variable name="file" type="File"/>
@@ -39,6 +40,7 @@
             android:maxLines="1"
             android:textSize="12sp"
             android:textColor="@color/gray"
+            android:visibility="@{file.type == File.Type.dir ? View.GONE : View.VISIBLE}"
             fileSize="@{file.size}"/>
     </LinearLayout>
 </layout>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cncoderx.andhub.BuildConfig;
 import com.cncoderx.andhub.R;
 import com.cncoderx.andhub.databinding.RepoDetailHomeFragmentBinding;
 import com.cncoderx.andhub.model.Repository;
@@ -87,6 +88,12 @@ public class RepoHomeFragment extends BaseFragment {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                    if (BuildConfig.DEBUG)
+                        throwable.printStackTrace();
                 }
             });
     }
