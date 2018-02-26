@@ -141,8 +141,10 @@ public class LoginActivity extends BaseActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        HttpException exception = (HttpException) throwable;
-                        showToast(exception.message());
+                        if (throwable instanceof HttpException) {
+                            HttpException exception = (HttpException) throwable;
+                            showToast(exception.message());
+                        }
                         hideProgress();
                     }
                 });
